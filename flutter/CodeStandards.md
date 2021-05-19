@@ -2,6 +2,7 @@
 
 ## Page
 * 点击事件统一放在controller，最好不要在page里面写回调逻辑。
+* 一般情况下，点击事件的注册用Widget的扩展方法onTab。
 
 
 ## Model
