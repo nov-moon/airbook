@@ -16,10 +16,7 @@ gitbook serve
 
 
 ## 发布 --测试环境
-```bash
-sh test.sh
 
-```
 
 
 
