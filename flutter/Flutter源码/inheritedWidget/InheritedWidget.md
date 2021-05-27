@@ -93,7 +93,7 @@ abstract class InheritedWidget extends ProxyWidget {
   @override
   InheritedElement createElement() => InheritedElement(this);
 
-  // 
+  // 当此方法返回false是，不会更新child。
   @protected
   bool updateShouldNotify(covariant InheritedWidget oldWidget);
 }
@@ -107,7 +107,8 @@ abstract class InheritedWidget extends ProxyWidget {
 最后一个流程：InheritedElement.notifyClients()源码如下，又回到_dependencies找到元素，并标记dirty。
 
 ```
-@override
+  //InheritedWidget
+  @override
   void notifyClients(InheritedWidget oldWidget) {
     assert(_debugCheckOwnerBuildTargetExists('notifyClients'));
     for (final Element dependent in _dependents.keys) {
@@ -123,8 +124,16 @@ abstract class InheritedWidget extends ProxyWidget {
       notifyDependent(oldWidget, dependent);
     }
   }
+
+  //Element
+  void rebuild() {
+    assert(_lifecycleState != _ElementLifecycle.initial);
+    //下面这个判断当_dirty为false时，不继续流程。
+    if (_lifecycleState != _ElementLifecycle.active || !_dirty)
+      return;
+    .......
+  }
 ```
-但是使用父Widget标dirty的方式，即使getElementForInheritedWidgetOfExactType也会被刷新，因为从父节点开始，所有的子Element都将用新的Widget刷新。
 
 ## 应用实例
 
