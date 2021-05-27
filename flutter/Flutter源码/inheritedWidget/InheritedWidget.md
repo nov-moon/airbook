@@ -124,7 +124,7 @@ abstract class InheritedWidget extends ProxyWidget {
     }
   }
 ```
-但是使用父Widget标dirty的方式，即使getElementForInheritedWidgetOfExactType也会被刷新，应为从父节点开始，所有的子Element都将用新的Widget刷新。
+但是使用父Widget标dirty的方式，即使getElementForInheritedWidgetOfExactType也会被刷新，因为从父节点开始，所有的子Element都将用新的Widget刷新。
 
 ## 应用实例
 
