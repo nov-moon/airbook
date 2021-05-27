@@ -244,4 +244,3 @@ load：通过key加载图片返回PictureStreamCompleter，这样一个管理图
 然后看到这里是通过SvgParser解析得到的。到这里整个的svg图片加载实际就理顺了。
 
 
-
