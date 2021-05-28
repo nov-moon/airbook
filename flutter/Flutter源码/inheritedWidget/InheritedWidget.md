@@ -174,7 +174,6 @@ static ThemeData of(BuildContext context) {
 
 ### Theme的使用
 从代码结构来看，ThemeData并没有传递性，如果你想用一个新的局部Theme来改变全局Theme的某一个属性是做不到的。新Theme的child不能能查询到全局Theme的ThemeData。
-1. 系统默认使用：在很多系统组件中，某些属性如果没有赋值，那么会自动查询Theme赋值，例如TextFormField：`final InputDecoration effectiveDecoration = (decoration ?? const InputDecoration())
-             .applyDefaults(Theme.of(field.context).inputDecorationTheme);`
+1. 系统默认使用：在很多系统组件中，某些属性如果没有赋值，那么会自动查询Theme赋值，例如TextFormField：`final InputDecoration effectiveDecoration = (decoration ?? const InputDecoration()).applyDefaults(Theme.of(field.context).inputDecorationTheme);`
 2. 主动使用：Theme.of(context)获取ThemeData，直接使用属性即可。     
 
