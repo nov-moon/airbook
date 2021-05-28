@@ -15,8 +15,10 @@ image的基本使用方法:
 Flutter可以为当前设备加载适合其分辨率的图像。
 首先要在根目录assets下,新建image文件夹，由于Flutter加载图片时需要2倍图、3倍图，默认图。所以需要同时新建2.0x和3.0x文件夹。
 ![](media/16214147812223.jpg)
+
 然后，在pubspec.yaml配置文件中，yaml是类似于xml的一种标记性语言，其中“-”表示数组。在这里，我们也可以使用下面的写法，加载整个资源文件图片：
 ![](media/16214149105016.jpg)
+
 使用资源图片文件(填入图片的全路径即可)：
 Image.asset("assets/images/flutter.jpeg")
 ## Image.network加载网络图片
@@ -69,6 +71,7 @@ Alignment.bottomLeft:底部居左
 Alignment.bottomRight:底部居右
 ## colorBlendMode图片颜色及混合模式
 ![-w331](media/16214779899749.jpg)
+
 color为源图像，image为目标图像
 BlendMode.clear:不显示源图像和目标图像。
 
@@ -133,30 +136,93 @@ BlendMode.luminosity: 获取源图像的​​亮度，以及目标图像的色�
 
 原图：
 ![](media/16214919179294.jpg)
+
 效果图：
 ![-w278](media/16214918660869.jpg)
 
 # Image的源码
+![-w673](media/16221102166163.jpg)
+
 
 下面通过Image.network的源码来看下图片是如何下载以及如何缓存的
-![](media/16214999851853.jpg)
-
-![](media/16215002219761.jpg)
-首先通过点击红色框可以看到网络加载的图片和AssetImage等都是image_provide的实现类，
+```
+Image.network(
+    String src, {
+    ...}) : image = ResizeImage.resizeIfNeeded(cacheWidth, cacheHeight, NetworkImage(src, scale: scale, headers: headers)),
+```
+NetworkImage他的实现类如下：
+```
+@immutable
+class NetworkImage extends image_provider.ImageProvider<image_provider.NetworkImage> implements image_provider.NetworkImage
+```
+可以看到网络加载的图片和AssetImage等都是image_provide的实现类，
 它的主要职责有两个：
 提供图片数据源
 缓存图片
 主要基类：
 ## resolve方法
-![](media/16215626657444.jpg)
+
+```
+@nonVirtual
+  ImageStream resolve(ImageConfiguration configuration)
+```
+
  使用给定的“ configuration”解析此图像，并返回[ImageStream]。这是[ImageProvider]类层次结构的公共入口点。子类应实现此方法使用的[obtainKey]和[load]。如果他们需要更改使用的[ImageStream]的实现，则应重写[createStream]。如果他们需要管理图像的实际分辨率，则应重写[resolveStreamForKey]。
  
  ImageConfiguration 包含图片和设备的相关信息，如图片的大小、所在的AssetBundle(只有打到安装包的图片存在)以及当前的设备平台、devicePixelRatio（设备像素比等）。Flutter SDK提供了一个便捷函数createLocalImageConfiguration来创建ImageConfiguration 对象：
-![](media/16215651304081.jpg)
+ 
+```
+@immutable
+class ImageConfiguration {
+  
+  const ImageConfiguration({
+    this.bundle,
+    this.devicePixelRatio,
+    this.locale,
+    this.textDirection,
+    this.size,
+    this.platform,
+  });
+```
 
  ##具体看下resolve方法
- ![](media/16215646183320.jpg)
-![](media/16215646645981.jpg)
+ 
+ ```
+ ImageStream resolve(ImageConfiguration configuration) {
+ ...
+ _createErrorHandlerAndKey(
+      configuration,
+      (T key, ImageErrorListener errorHandler) {
+        resolveStreamForKey(configuration, stream, key, errorHandler);
+      },
+ }
+ ```
+ 
+ 对应resolveStreamForKey方法实现：
+ 
+```
+@protected
+  void resolveStreamForKey(ImageConfiguration configuration, ImageStream stream, T key, ImageErrorListener handleError) {
+    if (stream.completer != null) {
+      final ImageStreamCompleter? completer = PaintingBinding.instance!.imageCache!.putIfAbsent(
+        key,
+        () => stream.completer!,
+        onError: handleError,
+      );
+      assert(identical(completer, stream.completer));
+      return;
+    }
+    final ImageStreamCompleter? completer = PaintingBinding.instance!.imageCache!.putIfAbsent(
+      key,
+      () => load(key, PaintingBinding.instance!.instantiateImageCodec),
+      onError: handleError,
+    );
+    if (completer != null) {
+      stream.setCompleter(completer);
+    }
+  }
+```
+  
 有缓存则使用缓存，没有缓存则调用load方法加载图片，加载成功后:
 
 先判断图片数据有没有缓存，如果有，则直接返回ImageStream。
@@ -164,43 +230,255 @@ BlendMode.luminosity: 获取源图像的​​亮度，以及目标图像的色�
 
 这里的PaintingBinding.instance.imageCache 是 ImageCache的一个实例，它是PaintingBinding的一个属性，而Flutter框架中的PaintingBinding.instance是一个单例，imageCache事实上也是一个单例，也就是说图片缓存是全局的，统一由PaintingBinding.instance.imageCache 来管理。
 
-![](media/16215652490415.jpg)
-这里是不是很熟悉。
 来看一下ImageCache
-![](media/16215656072932.jpg)
+
+```
+const int _kDefaultSize = 1000;
+const int _kDefaultSizeBytes = 100 << 20; // 100 MiB
+class ImageCache {
+  final Map<Object, _PendingImage> _pendingImages = <Object, _PendingImage>{};//正在加载中的图片队列
+  final Map<Object, _CachedImage> _cache = <Object, _CachedImage>{};//缓存队列
+  final Map<Object, _LiveImage> _liveImages = <Object, _LiveImage>{};//活动的图片队列
+  int get maximumSize => _maximumSize;
+  int _maximumSize = _kDefaultSize;
+
+```
+
 可以看到：
 _pendingImages正在加载中的图片队列
 _cache缓存队列
 缓存图片上线1000张，最大缓存100M
 
-![](media/16215659549504.jpg)
+```
+ImageStreamCompleter? putIfAbsent(Object key, ImageStreamCompleter loader(), { ImageErrorListener? onError }) {
+    ImageStreamCompleter? result = _pendingImages[key]?.completer;
+    // 如果正在加载队列不为空，还没有加载完成，直接返回
+    if (result != null) {
+      return result;
+    }
+    // 先删除旧的引用，以便后面重新加到最近使用的位置
+    final _CachedImage? image = _cache.remove(key);
+    if (image != null) {
+      _cache[key] = image;
+      return image.completer;
+    }
+    //如果活动图片不为空，返回活动图片
+    final _LiveImage? liveImage = _liveImages[key];
+    if (liveImage != null) {
+        return liveImage.completer;
+    }
+    //以上都没有则调用load加载
+    try {
+      result = loader();
+    } catch (error, stackTrace) {
+      if(onError != null) {
+        onError(error, stackTrace);
+        return null;
+      } else {
+        rethrow;
+      }
+    }
+    // 这里设置监听器为false
+    bool listenedOnce = false;
+    // 如果图片缓存不可用，也不应该使用正在加载的图片队列，那么我们至少要有一个监听器监听图片，否则活动图片会有内存泄漏风险 
+    _PendingImage? untrackedPendingImage;
+    void listener(ImageInfo? info, bool syncCall) {
+      int? sizeBytes;
+      if (info != null) {
+        sizeBytes = info.image.height * info.image.width * 4;
+        info.dispose();
+      }
+      final _CachedImage image = _CachedImage(
+        result!,
+        sizeBytes: sizeBytes,
+      );
+    //追踪活动图片
+      _trackLiveImage(key, result, sizeBytes);
+      // 如果初次调用resolve时缓存了那么只追踪图片
+      if (untrackedPendingImage == null) {
+        _touch(key, image, listenerTask);
+      } else {
+        image.dispose();
+      }
+      //如果没有加载完成则移除监听
+      final _PendingImage? pendingImage = untrackedPendingImage ?? _pendingImages.remove(key);
+      if (pendingImage != null) {
+        pendingImage.removeListener();
+      }
+      //监听状态置为true
+      listenedOnce = true;
+    }
+    //给图片添加监听
+    final ImageStreamListener streamListener = ImageStreamListener(listener);
+    if (maximumSize > 0 && maximumSizeBytes > 0) {
+      _pendingImages[key] = _PendingImage(result, streamListener);
+    } else {
+      untrackedPendingImage = _PendingImage(result, streamListener);
+    }
+    // 添加监听器
+    result.addListener(streamListener);
+    return result;
+  }
+```
+
 可以看到，这里检测缓存图片是否存在，存在则直接返回，不存在则删掉缓存中对应的key，然后缓存图片。
-![](media/16215661190688.jpg)
+
+//下面检测缓存方法
+```
+ void _checkCacheSize(TimelineTask? timelineTask) {
+    final Map<String, dynamic> finishArgs = <String, dynamic>{};
+    TimelineTask? checkCacheTask;
+    while (_currentSizeBytes > _maximumSizeBytes || _cache.length > _maximumSize) {
+      final Object key = _cache.keys.first;
+      final _CachedImage image = _cache[key]!;
+      _currentSizeBytes -= image.sizeBytes!;
+      image.dispose();
+      _cache.remove(key);
+    }
+  }
+```
+
 当缓存数量超过最大值或缓存大小超过最大缓存容量，则会清理到缓存上限以内。
  ## obtainKey方法
-![](media/16215626953836.jpg)
+Future<T> obtainKey(ImageConfiguration configuration);
 该接口主要是为了配合实现图片缓存，ImageProvider从数据源加载完数据后，会在全局的ImageCache中缓存图片数据，而图片数据缓存是一个Map，而Map的key便是调用此方法的返回值，不同的key代表不同的图片数据缓存。对应实现：
-![](media/16215668830690.jpg)
+```
+@override
+  Future<NetworkImage> obtainKey(image_provider.ImageConfiguration configuration) {
+    return SynchronousFuture<NetworkImage>(this);
+  }
+```
+
 因为Map中在判断key（此时是NetworkImage对象）是否相等时会使用"="运算符，那么定义key的逻辑就是NetworkImage的“==”运算符：
-![](media/16215669259953.jpg)
-这里可以看出key是由url+scale决定的，同一个url不同scale会重复下载。
+```
+ @override
+  bool operator ==(Object other) {
+    if (other.runtimeType != runtimeType)
+      return false;
+    return other is NetworkImage
+        && other.url == url
+        && other.scale == scale;
+  }
+```
+
+  这里可以看出key是由url+scale决定的，同一个url不同scale会重复下载。
 
 ## load方法
-![](media/16215627283738.jpg)
+
+```
+ @protected
+  ImageStreamCompleter load(T key, DecoderCallback decode);
+```
 将密钥转换为[ImageStreamCompleter]，然后开始获取图像。 [decode]回调提供了获取图像编解码器的逻辑。
 load方法的返回值类型是ImageStreamCompleter ，它是一个抽象类，定义了管理图片加载过程的一些接口，Image Widget中正是通过它来监听图片加载状态的。
 
 MultiFrameImageStreamCompleter 是 ImageStreamCompleter的一个子类，是flutter sdk预置的类，通过该类，我们可以方便、轻松地创建出一个ImageStreamCompleter实例来做为load方法的返回值。
 
 具体子类NetworkImage实现load
-![](media/16215048335648.jpg)
-![](media/16215675426824.jpg)
+
+```
+ @override
+  ImageStreamCompleter load(image_provider.NetworkImage key, image_provider.DecoderCallback decode) {
+    // Ownership of this controller is handed off to [_loadAsync]; it is that
+    // method's responsibility to close the controller's stream when the image
+    // has been loaded or an error is thrown.
+    final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
+
+    return MultiFrameImageStreamCompleter(
+      codec: _loadAsync(key as NetworkImage, chunkEvents, decode),
+```
+具体_loadAsync实现
+
+```
+ Future<ui.Codec> _loadAsync(
+    NetworkImage key,
+    StreamController<ImageChunkEvent> chunkEvents,
+    image_provider.DecoderCallback decode,
+  ) async {
+    try {
+    //解析url
+      final Uri resolved = Uri.base.resolve(key.url);
+    //请求网络
+      final HttpClientRequest request = await _httpClient.getUrl(resolved);
+
+      headers?.forEach((String name, String value) {
+        request.headers.add(name, value);
+      });
+      final HttpClientResponse response = await request.close();
+     //将HttpClientResponse的响应主体转换为Uint8List 。返回的Future将转发response发出的任何错误。
+      final Uint8List bytes = await consolidateHttpClientResponseBytes(
+        response,
+        onBytesReceived: (int cumulative, int? total) {
+          chunkEvents.add(ImageChunkEvent(
+            cumulativeBytesLoaded: cumulative,
+            expectedTotalBytes: total,
+          ));
+        },
+      );
+      return decode(bytes);
+    } catch (e) {
+     //添加微任务，移除对应缓存
+      scheduleMicrotask(() {
+        PaintingBinding.instance!.imageCache!.evict(key);
+      });
+      rethrow;
+    } finally {
+      chunkEvents.close();
+    }
+  }
+```
+
 可以看到_loadAsync方法主要做了两件事：
 1.下载图片。
 2.对下载的图片数据进行解码。
 这里获取图片，解码图片。具体解码图片是底层做的。
 
-![](media/16215677827461.jpg)
+```
+@pragma('vm:entry-point')
+class Codec extends NativeFieldWrapperClass2 {
+  //此类是由引擎创建的，不应直接实例化或扩展。要获取[Codec]接口的实例，请参见[instantiateImageCodec]。
+  @pragma('vm:entry-point')
+  Codec._();
+
+  int? _cachedFrameCount;
+  /// 记录该图像帧数
+  int get frameCount => _cachedFrameCount ??= _frameCount;
+  int get _frameCount native 'Codec_frameCount';
+
+  int? _cachedRepetitionCount;
+  /// 动画重复次数
+  ///
+  /// * 0 动画播放一次.
+  /// * -1 无限重复.
+  int get repetitionCount => _cachedRepetitionCount ??= _repetitionCount;
+  int get _repetitionCount native 'Codec_repetitionCount';
+
+  /// 获取下一个动画帧。返回最后一帧后返回到第一帧。如果解码失败，则返回的future可能会出现错误。此方法的调用者负责将[FrameInfo.image]放置在返回的对象上
+  Future<FrameInfo> getNextFrame() async {
+    final Completer<FrameInfo> completer = Completer<FrameInfo>.sync();
+    final String? error = _getNextFrame((_Image? image, int durationMilliseconds) {
+      if (image == null) {
+        completer.completeError(Exception('Codec failed to produce an image, possibly due to invalid image data.'));
+      } else {
+        completer.complete(FrameInfo._(
+          image: Image._(image),
+          duration: Duration(milliseconds: durationMilliseconds),
+        ));
+      }
+    });
+    if (error != null) {
+      throw Exception(error);
+    }
+    return await completer.future;
+  }
+
+  /// 如果失败，则返回错误消息，如果成功，则返回null
+  String? _getNextFrame(void Function(_Image?, int) callback) native 'Codec_getNextFrame';
+
+  /// 释放该对象使用的资源。调用此方法后，该对象不再可用
+  void dispose() native 'Codec_dispose';
+}
+```
 我们可以看到Codec最终的结果是一个或多个（动图）帧，而这些帧最终会绘制到屏幕上。
 
 另外，我们需要注意的是，图片缓存是在内存中，并没有进行本地文件持久化存储，这也是为什么网络图片在应用重启后需要重新联网下载的原因。
@@ -213,34 +491,273 @@ MultiFrameImageStreamCompleter 是 ImageStreamCompleter的一个子类，是flut
 下面我们也从SvgPicture.network来了解flutter_svg的源码。
 ### SvgPicture.network加载网络svg图片
 首先看到这个方法存在于SvgPicture这个类里。
-![](media/16215866410515.jpg)
+
+```
+SvgPicture.network(
+    String url, {
+   ...  })  : pictureProvider = NetworkPicture(
+          allowDrawingOutsideViewBox == true
+              ? svgByteDecoderOutsideViewBox
+              : svgByteDecoder,
+          url,
+          headers: headers,
+          colorFilter: svg.cacheColorFilterOverride ?? cacheColorFilter
+              ? _getColorFilter(color, colorBlendMode)
+              : null,
+        ),
+        colorFilter = _getColorFilter(color, colorBlendMode),
+        super(key: key);
+```
 然后SvgPicture 他是一个StatefulWidget，然后这个类他必然后build和createState方法，这样我们直接去看他的build方法
-![](media/16215871732948.jpg)
+
+```
+ @override
+  Widget build(BuildContext context) {
+    late Widget child;
+    if (_picture != null) {
+      final Rect viewport = Offset.zero & _picture!.viewport.size;
+
+      ...      
+      child = SizedBox(
+        width: width,
+        height: height,
+        child: FittedBox(
+          fit: widget.fit,
+          alignment: widget.alignment,
+          clipBehavior: widget.clipBehavior,
+          child: SizedBox.fromSize(
+            size: viewport.size,
+            child: RawPicture(
+              _picture,
+              matchTextDirection: widget.matchTextDirection,
+              allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
+            ),
+          ),
+        ),
+      );
+
+      ...
+    return child;
+  }
+```
 可以看到build是绘制的_picture然后画出来的svg图片，这里_picture是一个包含Picture的用来绘制到canvas上的实体类。
-![](media/16215874731943.jpg)
+
+```
+@immutable
+class PictureInfo {
+  /// Creates a new PictureInfo object.
+  const PictureInfo({
+    required this.picture,
+    required this.viewport,
+    this.size = Size.infinite,
+  })  : assert(picture != null), // ignore: unnecessary_null_comparison
+        assert(viewport != null), // ignore: unnecessary_null_comparison
+        assert(size != null); // ignore: unnecessary_null_comparison
+
+```
 Picture则是表示记录的图形操作序列的对象，可以使用[SceneBuilder]将[Picture]放置在[Scene]中。也可以使用[Canvas.drawPicture]方法将[Picture]绘制到[Canvas]中。
 ### URL中的byte加载到PictureInfo流程
-![](media/16215879365171.jpg)
+
+```
+ SvgPicture.network(
+    String url, {
+   ...  })  : pictureProvider = NetworkPicture(
+          allowDrawingOutsideViewBox == true
+              ? svgByteDecoderOutsideViewBox
+              : svgByteDecoder,
+          url,
+          headers: headers,
+```
 首先看到NetworkPicture是从PictureProvider实现过来的。
-![](media/16215880628793.jpg)
+
+```
+@optionalTypeArgs
+abstract class PictureProvider<T> {
+   const PictureProvider(this.colorFilter);
+    //图片缓存
+  static final PictureCache cache = PictureCache();
+
+  /// 缓存个数
+  @Deprecated
+  static int get cacheCount => cache.count;
+
+  /// 清空缓存
+  @Deprecated('Use the `cache` object directly instead.')
+  static void clearCache() => cache.clear();
+
+  /// 颜色过滤
+  final ColorFilter? colorFilter;
+
+  /// 使用给定的configuration解析此Picture提供程序，并返回一个PictureStream 。
+/// 这是PictureProvider类层次结构的公共入口点。
+/// 子类应实现此方法使用的obtainKey和load 
+  PictureStream resolve(PictureConfiguration picture,
+      {PictureErrorListener? onError}) {
+     }
+
+  /// 将pictureProvider的设置以及pictureConfiguration转换为描述要加载的精确图片的键。密钥的类型由子类确定。它是一个明确标识[load]方法将获取的图片（_包括其scale_）的值。给不同的[PictureProvider]赋予相同的构造函数参数和[PictureConfiguration]对象应互相返回==的键（可能是通过对本身实现[==]的键使用类）。
+  Future<T> obtainKey(PictureConfiguration picture);
+  
+  /// 将密钥转换为[PictureStreamCompleter]，然后开始获取图片
+  @protected
+  PictureStreamCompleter load(T key, {PictureErrorListener? onError});
+}
+```
 PictureProvider有三个和ImageProvider一样的方法，其实起到的作用也一样，咱们这里就不详细说了。
 resole：是公共入口，里面调用了obtainKey和load方法，然后子类要实现obtainKey和load方法。
 obtainKey：通过PictureConfiguration获取图片的key作为唯一标识。
 load：通过key加载图片返回PictureStreamCompleter，这样一个管理图片的对象。
 #### 缓存
-![](media/16215902497801.jpg)
+
+```
+ PictureStream resolve(PictureConfiguration picture,
+      {PictureErrorListener? onError}) {
+    final PictureStream stream = PictureStream();
+    T? obtainedKey;
+    obtainKey(picture).then<void>(
+      (T key) {
+        obtainedKey = key;
+        stream.setCompleter(
+          cache.putIfAbsent(
+            key!,
+            () => load(key, onError: onError),
+          ),
+        );
+      },
+    )
+```
 这里同样是有缓存则直接用缓存文件，没有则调用load方法从网络下载。和原生ImageProvider不同的是svg缓存只有一个限制最大1000个svg图片。
-![](media/16215905127762.jpg)
+
+```
+const int _kDefaultSize = 1000;/// 缓存最大个数
+class PictureCache {
+  final Map<Object, PictureStreamCompleter> _cache =
+      <Object, PictureStreamCompleter>{};/// 缓存队列
+
+  int get maximumSize => _maximumSize;
+  int _maximumSize = _kDefaultSize;
+
+  /// 清空缓存
+  void clear() {
+    _cache.clear();
+  }
+
+  /// 返回给定密钥的先前缓存的PictureStream （如果有）；否则，返回PictureStream 。 如果不是，则首先调用给定的回调。 在这两种情况下，密钥都将移动到“最近使用”的位置。
+/// 参数不能为空。 loader无法返回null。
+  PictureStreamCompleter putIfAbsent(
+      Object key, PictureStreamCompleter loader()) {
+     PictureStreamCompleter? result = _cache[key];
+    if (result != null) {
+      // 先移除，这样就能放到最近访问位置
+      _cache.remove(key);
+    } else {
+      if (_cache.length == maximumSize && maximumSize > 0)
+        _cache.remove(_cache.keys.first);
+      result = loader();
+    }
+    if (maximumSize > 0) {
+      assert(_cache.length < maximumSize);
+      _cache[key] = result;
+    }
+    return result;
+  }
+
+  /// The number of entries in the cache.
+  int get count => _cache.length;
+}
+```
 可以看到这里缓存svg图片，先判断是否有缓存，如果有直接用，如果没有判断是否超过最大缓存数量限制，如果超过移除第一个然后，从网络加载，先存到缓存然后返回。
 #### 查看load实现。
-![](media/16215886255573.jpg)
+
+```
+@override
+  PictureStreamCompleter load(NetworkPicture key,
+      {PictureErrorListener? onError}) {
+    return OneFramePictureStreamCompleter(_loadAsync(key, onError: onError),/// 一帧图片管理器
+        informationCollector: () sync* {
+      yield DiagnosticsProperty<PictureProvider>('Picture provider', this);/// 图片诊断器，检测图片属性
+      yield DiagnosticsProperty<NetworkPicture>('Picture key', key);
+    });
+  }
+ /// 下载图片
+  Future<PictureInfo> _loadAsync(NetworkPicture key,
+      {PictureErrorListener? onError}) async {
+    assert(key == this);
+    final Uint8List bytes = await httpGet(url, headers: headers);
+    if (onError != null) {
+      return decoder(
+        bytes,
+        colorFilter,
+        key.toString(),
+      ).catchError((Object error, StackTrace stack) {
+        onError(error, stack);
+        return Future<PictureInfo>.error(error, stack);
+      });
+    }
+    return decoder(bytes, colorFilter, key.toString());
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    return other is NetworkPicture &&
+        url == other.url &&
+        colorFilter == other.colorFilter;
+  }
+```
 同样的NetworkPicture中有通过url下载图片，最后_loadAsync返回PictureInfo，以及图片的key是由url+colorFilter组成，这样的代码。
 那么bytes是怎么解析成PictureInfo的呢？
-![](media/16215895256515.jpg)
+
+```
+ pictureProvider = NetworkPicture(
+          allowDrawingOutsideViewBox == true
+              ? svgByteDecoderOutsideViewBox
+              : svgByteDecoder,
+          url,
+```
 看到这里就很清楚了
-![](media/16215896030340.jpg)
-![](media/16215896684388.jpg)
-![](media/16215897070453.jpg)
+
+```
+ /// A [PictureInfoDecoder] for [Uint8List]s that will clip to the viewBox.
+  static final PictureInfoDecoder<Uint8List> svgByteDecoder =
+      (Uint8List bytes, ColorFilter? colorFilter, String key) =>
+          svg.svgPictureDecoder(bytes, false, colorFilter, key);
+
+  /// A [PictureInfoDecoder] for strings that will clip to the viewBox.
+  static final PictureInfoDecoder<String> svgStringDecoder =
+      (String data, ColorFilter? colorFilter, String key) =>
+          svg.svgPictureStringDecoder(data, false, colorFilter, key);
+
+```
+
+```
+ Future<PictureInfo> svgPictureDecoder(
+    Uint8List raw,
+    bool allowDrawingOutsideOfViewBox,
+    ColorFilter? colorFilter,
+    String key,
+  ) async {
+    final DrawableRoot svgRoot = await fromSvgBytes(raw, key);
+    final Picture pic = svgRoot.toPicture(
+      clipToViewBox: allowDrawingOutsideOfViewBox == true ? false : true,
+      colorFilter: colorFilter,
+    );
+    return PictureInfo(
+      picture: pic,
+      viewport: svgRoot.viewport.viewBoxRect,
+      size: svgRoot.viewport.size,
+    );
+  }
+```
+
+```
+ Future<DrawableRoot> fromSvgString(String rawSvg, String key) async {
+    final SvgParser parser = SvgParser();
+    return await parser.parse(rawSvg, key: key);
+  }
+```
 然后看到这里是通过SvgParser解析得到的。到这里整个的svg图片加载实际就理顺了。
 
 
