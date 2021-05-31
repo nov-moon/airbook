@@ -142,8 +142,8 @@ BlendMode.luminosity: 获取源图像的​​亮度，以及目标图像的色�
 
 # Image的源码
 ![-w673](media/16221102166163.jpg)
-
-
+具体图片加载时序图
+![-w348](media/16224468958762.jpg)
 下面通过Image.network的源码来看下图片是如何下载以及如何缓存的
 ```
 Image.network(
