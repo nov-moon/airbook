@@ -22,8 +22,10 @@ Flutter可以为当前设备加载适合其分辨率的图像。
 使用资源图片文件(填入图片的全路径即可)：
 Image.asset("assets/images/flutter.jpeg")
 ## Image.network加载网络图片
+```dart
 Image.network(
             'https://image1.guazistatic.com/qn210519171455ac369db6cfecbf11d017210f2986a031.jpg')
+```
 ## Image.file加载图片文件
 Image.file(File("/sdcard/flutter.jpeg"))
 注意在AndroidManifest.xml中配置读写文件权限
@@ -759,5 +761,51 @@ class PictureCache {
   }
 ```
 然后看到这里是通过SvgParser解析得到的。到这里整个的svg图片加载实际就理顺了。
+问题一：第一次加载怎么缓存到_cache里的？
+第一次load以后listener里有个_touch方法做了缓存到_cache里上代码：
+
+```
+void _touch(Object key, _CachedImage image, TimelineTask? timelineTask) {
+       if (image.sizeBytes != null && image.sizeBytes! <= maximumSizeBytes && maximumSize > 0) {
+      _currentSizeBytes += image.sizeBytes!;///图片大小加到缓存大小里
+      _cache[key] = image;/// 图片添加到缓存
+      _checkCacheSize(timelineTask); /// 检测缓存大小
+    } else {
+      image.dispose();
+    }
+  }
+```
+引用流程：
+
+```
+    try {
+      result = loader();
+      _trackLiveImage(key, result, null);///把图放到liveimages
+    } catch (error, stackTrace) {}
+    bool listenedOnce = false;/// 只监听一次标志
+    _PendingImage? untrackedPendingImage;
+    void listener(ImageInfo? info, bool syncCall) {
+    ...
+     /// 如果初次调用resolve会触发touch 
+      if (untrackedPendingImage == null) {
+        _touch(key, image, listenerTask);
+      } else {
+        image.dispose();
+      }
+      ...
+      listenedOnce = true;
+    }
+
+    final ImageStreamListener streamListener = ImageStreamListener(listener);
+```
+问题二：ExactAssetImage和AssetImage区别？
+从表达式就能看出
+
+```
+scale != null
+? ExactAssetImage(name, bundle: bundle, scale: scale, package: package)
+         : AssetImage(name, bundle: bundle, package: package)
 
 
+```
+有scale用ExactAssetImage，没有用AssetImage，具体区别其实是，AssetImage会自动根据使用场景的设备参数，屏幕像素比自动使用对应1x还是2x,3x的图片。而ExactAssetImage则忽略设备像素比，通过给定的确切assetName和scale来获取图片
