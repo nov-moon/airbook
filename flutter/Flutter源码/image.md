@@ -798,6 +798,7 @@ void _touch(Object key, _CachedImage image, TimelineTask? timelineTask) {
 
     final ImageStreamListener streamListener = ImageStreamListener(listener);
 ```
+调用loader()后默认图片如果允许缓存（缓存数量没到最大，缓存空间有）默认先放到_pendingImages里，不允许缓存先放到untrackedPendingImage里这是图片还没有加载完成，如果加载完成会通过监听器ImageStreamListener调用listener（）方法，根据untrackedPendingImage判断是否允许缓存，允许缓存则调用_touch方法将图片加到_cache中。不允许释放缓存图片。
 问题二：ExactAssetImage和AssetImage区别？
 从表达式就能看出
 
@@ -809,3 +810,7 @@ scale != null
 
 ```
 有scale用ExactAssetImage，没有用AssetImage，具体区别其实是，AssetImage会自动根据使用场景的设备参数，屏幕像素比自动使用对应1x还是2x,3x的图片。而ExactAssetImage则忽略设备像素比，通过给定的确切assetName和scale来获取图片
+问题三 缓存中具体_pendingImages，_cache，_liveImages有什么区别？
+_pendingImages是图片正在缓冲时，当图片没有加载完成时，暂时存在这里，加载后通过监听器将图片放到_cache中。
+_liveImages是存储活动图片的，即被其他对象引用的图片。具体作用其实是活动的图片一个集合，无论是_pendingImages还是_cache的图片都可能存在，即使不允许缓存（缓存空间为0）也会加进来，用来追踪图片。
+当然从缓存获取图片是会依次遍历这三个集合，哪个有就返回，如果_liveImages有而_cache没有还会将图片加到_cache中。
