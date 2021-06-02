@@ -6,6 +6,7 @@
         * [从官方demo开始](flutter/第三方框架/GetX/GetX（一）.md)
         * [GetxController和GetX](flutter/第三方框架/GetX/GetX（二）.md)
         * [GetBuilder](flutter/第三方框架/GetX/GetX（三）.md)
+    * [Provider](flutter/第三方框架/Provider/Provider.md)
 * [Flutter源码](flutter/Flutter源码/README.md)
     * [Image源码分析](flutter/Flutter源码/image.md)
     * [InheritedWidget](flutter/Flutter源码/inheritedWidget/InheritedWidget.md)
