@@ -1,0 +1,1124 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Image源码分析 · airbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="ifmu">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-multipart/multipart.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="inheritedWidget/InheritedWidget.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="" target="_blank" class="custom-link">首页</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../第三方框架/">
+            
+                <a href="../第三方框架/">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Flutter-第三方库
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../第三方框架/GetX/">
+            
+                <a href="../第三方框架/GetX/">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    GetX
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../第三方框架/GetX/GetX（一）.html">
+            
+                <a href="../第三方框架/GetX/GetX（一）.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    从官方demo开始
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../第三方框架/GetX/GetX（二）.html">
+            
+                <a href="../第三方框架/GetX/GetX（二）.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    GetxController和GetX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../第三方框架/GetX/GetX（三）.html">
+            
+                <a href="../第三方框架/GetX/GetX（三）.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    GetBuilder
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Flutter源码
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="image.html">
+            
+                <a href="image.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    Image源码分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="inheritedWidget/InheritedWidget.html">
+            
+                <a href="inheritedWidget/InheritedWidget.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    InheritedWidget
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="intl/internationalization.html">
+            
+                <a href="intl/internationalization.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    Flutter国际化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Image源码分析</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="image&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;"><a name="image&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#image&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>Image&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;</h1>
+<p>Image&#x662F;&#x663E;&#x793A;&#x56FE;&#x7247;&#x7684;&#x4E00;&#x4E2A;Widget&#x3002;image&#x652F;&#x6301;&#x7684;&#x56FE;&#x7247;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;JPEG, PNG, GIF, Animated GIF, WebP, Animated WebP, BMP, and WBMP&#x3002;
+image&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;:</p>
+<table>
+<thead>
+<tr>
+<th>&#x6784;&#x9020;&#x65B9;&#x6CD5;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Image()</td>
+<td>&#x4ECE;ImageProvider&#x4E2D;&#x83B7;&#x53D6;&#x56FE;&#x7247;&#xFF0C;&#x4ECE;&#x672C;&#x8D28;&#x4E0A;&#x770B;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x51E0;&#x4E2A;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x4ED6;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x3002;</td>
+</tr>
+<tr>
+<td>Image.asset(String name)</td>
+<td>&#x4ECE;AssetBundler&#x4E2D;&#x83B7;&#x53D6;&#x56FE;&#x7247;</td>
+</tr>
+<tr>
+<td>Image.network(String url)</td>
+<td>&#x663E;&#x793A;&#x7F51;&#x7EDC;&#x56FE;&#x7247;&#xFF0C;&#x53C2;&#x6570;&#x4E3A;url</td>
+</tr>
+<tr>
+<td>Image.file(File file)</td>
+<td>&#x4ECE;File&#x4E2D;&#x83B7;&#x53D6;&#x56FE;&#x7247;</td>
+</tr>
+<tr>
+<td>Image.memory(Uint8List bytes)</td>
+<td>&#x4ECE;Uint8List&#x4E2D;&#x663E;&#x793A;&#x56FE;&#x7247;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5177;&#x4F53;&#x4F7F;&#x7528;&#xFF1A;</p>
+<h2 id="imageasset&#x52A0;&#x8F7D;&#x8D44;&#x6E90;&#x56FE;&#x7247;"><a name="imageasset&#x52A0;&#x8F7D;&#x8D44;&#x6E90;&#x56FE;&#x7247;" class="anchor-navigation-ex-anchor" href="#imageasset&#x52A0;&#x8F7D;&#x8D44;&#x6E90;&#x56FE;&#x7247;"><i class="fa fa-link" aria-hidden="true"></i></a>image.asset&#x52A0;&#x8F7D;&#x8D44;&#x6E90;&#x56FE;&#x7247;</h2>
+<p>Flutter&#x53EF;&#x4EE5;&#x4E3A;&#x5F53;&#x524D;&#x8BBE;&#x5907;&#x52A0;&#x8F7D;&#x9002;&#x5408;&#x5176;&#x5206;&#x8FA8;&#x7387;&#x7684;&#x56FE;&#x50CF;&#x3002;
+&#x9996;&#x5148;&#x8981;&#x5728;&#x6839;&#x76EE;&#x5F55;assets&#x4E0B;,&#x65B0;&#x5EFA;image&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x7531;&#x4E8E;Flutter&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x65F6;&#x9700;&#x8981;2&#x500D;&#x56FE;&#x3001;3&#x500D;&#x56FE;&#xFF0C;&#x9ED8;&#x8BA4;&#x56FE;&#x3002;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x540C;&#x65F6;&#x65B0;&#x5EFA;2.0x&#x548C;3.0x&#x6587;&#x4EF6;&#x5939;&#x3002;
+<a href="media/16214147812223.jpg" data-lightbox="2a4d912f-2212-4b0b-bae1-a6f4d2e0b539" data-title=""><img src="media/16214147812223.jpg" alt=""></a></p>
+<p>&#x7136;&#x540E;&#xFF0C;&#x5728;pubspec.yaml&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;yaml&#x662F;&#x7C7B;&#x4F3C;&#x4E8E;xml&#x7684;&#x4E00;&#x79CD;&#x6807;&#x8BB0;&#x6027;&#x8BED;&#x8A00;&#xFF0C;&#x5176;&#x4E2D;&#x201C;-&#x201D;&#x8868;&#x793A;&#x6570;&#x7EC4;&#x3002;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x52A0;&#x8F7D;&#x6574;&#x4E2A;&#x8D44;&#x6E90;&#x6587;&#x4EF6;&#x56FE;&#x7247;&#xFF1A;
+<a href="media/16214149105016.jpg" data-lightbox="49f593d2-67bd-4346-85fe-f7f7d15481fe" data-title=""><img src="media/16214149105016.jpg" alt=""></a></p>
+<p>&#x4F7F;&#x7528;&#x8D44;&#x6E90;&#x56FE;&#x7247;&#x6587;&#x4EF6;(&#x586B;&#x5165;&#x56FE;&#x7247;&#x7684;&#x5168;&#x8DEF;&#x5F84;&#x5373;&#x53EF;)&#xFF1A;
+Image.asset(&quot;assets/images/flutter.jpeg&quot;)</p>
+<h2 id="imagenetwork&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;&#x56FE;&#x7247;"><a name="imagenetwork&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;&#x56FE;&#x7247;" class="anchor-navigation-ex-anchor" href="#imagenetwork&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;&#x56FE;&#x7247;"><i class="fa fa-link" aria-hidden="true"></i></a>Image.network&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;&#x56FE;&#x7247;</h2>
+<pre><code class="lang-dart">Image.network(
+            <span class="hljs-string">&apos;https://image1.guazistatic.com/qn210519171455ac369db6cfecbf11d017210f2986a031.jpg&apos;</span>)
+</code></pre>
+<h2 id="imagefile&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x6587;&#x4EF6;"><a name="imagefile&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x6587;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#imagefile&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>Image.file&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x6587;&#x4EF6;</h2>
+<p>Image.file(File(&quot;/sdcard/flutter.jpeg&quot;))
+&#x6CE8;&#x610F;&#x5728;AndroidManifest.xml&#x4E2D;&#x914D;&#x7F6E;&#x8BFB;&#x5199;&#x6587;&#x4EF6;&#x6743;&#x9650;</p>
+<h2 id="imagememory&#x52A0;&#x8F7D;&#x7F13;&#x5B58;&#x6587;&#x4EF6;"><a name="imagememory&#x52A0;&#x8F7D;&#x7F13;&#x5B58;&#x6587;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#imagememory&#x52A0;&#x8F7D;&#x7F13;&#x5B58;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>Image.memory&#x52A0;&#x8F7D;&#x7F13;&#x5B58;&#x6587;&#x4EF6;</h2>
+<p>Image.memory(bytes);</p>
+<h2 id="fit&#x5C5E;&#x6027;&#x7684;&#x8BBE;&#x7F6E;"><a name="fit&#x5C5E;&#x6027;&#x7684;&#x8BBE;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#fit&#x5C5E;&#x6027;&#x7684;&#x8BBE;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>fit&#x5C5E;&#x6027;&#x7684;&#x8BBE;&#x7F6E;</h2>
+<p>fit&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x56FE;&#x7247;&#x7684;&#x62C9;&#x4F38;&#x548C;&#x6324;&#x538B;&#xFF0C;&#x8FD9;&#x4E9B;&#x90FD;&#x662F;&#x6839;&#x636E;&#x56FE;&#x7247;&#x7684;&#x7236;&#x7EA7;&#x5BB9;&#x5668;&#x6765;&#x7684;.</p>
+<p>BoxFit.fill:&#x5168;&#x56FE;&#x663E;&#x793A;&#xFF0C;&#x56FE;&#x7247;&#x4F1A;&#x88AB;&#x62C9;&#x4F38;&#xFF0C;&#x5E76;&#x5145;&#x6EE1;&#x7236;&#x5BB9;&#x5668;&#x3002;</p>
+<p>BoxFit.contain:&#x5168;&#x56FE;&#x663E;&#x793A;&#xFF0C;&#x663E;&#x793A;&#x539F;&#x6BD4;&#x4F8B;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x7A7A;&#x9699;&#x3002;</p>
+<p>BoxFit.cover&#xFF1A;&#x663E;&#x793A;&#x53EF;&#x80FD;&#x62C9;&#x4F38;&#xFF0C;&#x53EF;&#x80FD;&#x88C1;&#x5207;&#xFF0C;&#x5145;&#x6EE1;&#xFF08;&#x56FE;&#x7247;&#x8981;&#x5145;&#x6EE1;&#x6574;&#x4E2A;&#x5BB9;&#x5668;&#xFF0C;&#x8FD8;&#x4E0D;&#x53D8;&#x5F62;&#xFF09;&#x3002;</p>
+<p>BoxFit.fitWidth&#xFF1A;&#x5BBD;&#x5EA6;&#x5145;&#x6EE1;&#xFF08;&#x6A2A;&#x5411;&#x5145;&#x6EE1;&#xFF09;&#xFF0C;&#x663E;&#x793A;&#x53EF;&#x80FD;&#x62C9;&#x4F38;&#xFF0C;&#x53EF;&#x80FD;&#x88C1;&#x5207;&#x3002;</p>
+<p>BoxFit.fitHeight &#xFF1A;&#x9AD8;&#x5EA6;&#x5145;&#x6EE1;&#xFF08;&#x7AD6;&#x5411;&#x5145;&#x6EE1;&#xFF09;,&#x663E;&#x793A;&#x53EF;&#x80FD;&#x62C9;&#x4F38;&#xFF0C;&#x53EF;&#x80FD;&#x88C1;&#x5207;&#x3002;</p>
+<p>BoxFit.scaleDown&#xFF1A;&#x6548;&#x679C;&#x548C;contain&#x5DEE;&#x4E0D;&#x591A;&#xFF0C;&#x4F46;&#x662F;&#x6B64;&#x5C5E;&#x6027;&#x4E0D;&#x5141;&#x8BB8;&#x663E;&#x793A;&#x8D85;&#x8FC7;&#x6E90;&#x56FE;&#x7247;&#x5927;&#x5C0F;&#xFF0C;&#x53EF;&#x5C0F;&#x4E0D;&#x53EF;&#x5927;&#x3002;</p>
+<h2 id="repeat&#x56FE;&#x7247;&#x91CD;&#x590D;"><a name="repeat&#x56FE;&#x7247;&#x91CD;&#x590D;" class="anchor-navigation-ex-anchor" href="#repeat&#x56FE;&#x7247;&#x91CD;&#x590D;"><i class="fa fa-link" aria-hidden="true"></i></a>repeat&#x56FE;&#x7247;&#x91CD;&#x590D;</h2>
+<p>ImageRepeat.repeat : &#x6A2A;&#x5411;&#x548C;&#x7EB5;&#x5411;&#x90FD;&#x8FDB;&#x884C;&#x91CD;&#x590D;&#xFF0C;&#x76F4;&#x5230;&#x94FA;&#x6EE1;&#x6574;&#x4E2A;&#x753B;&#x5E03;&#x3002;</p>
+<p>ImageRepeat.repeatX: &#x6A2A;&#x5411;&#x91CD;&#x590D;&#xFF0C;&#x7EB5;&#x5411;&#x4E0D;&#x91CD;&#x590D;&#x3002;</p>
+<p>ImageRepeat.repeatY&#xFF1A;&#x7EB5;&#x5411;&#x91CD;&#x590D;&#xFF0C;&#x6A2A;&#x5411;&#x4E0D;&#x91CD;&#x590D;&#x3002;</p>
+<p>ImageRepeat.noRepeat:&#x4E0D;&#x91CD;&#x590D;&#x3002;</p>
+<h2 id="alignment&#x56FE;&#x7247;&#x5BF9;&#x9F50;"><a name="alignment&#x56FE;&#x7247;&#x5BF9;&#x9F50;" class="anchor-navigation-ex-anchor" href="#alignment&#x56FE;&#x7247;&#x5BF9;&#x9F50;"><i class="fa fa-link" aria-hidden="true"></i></a>alignment&#x56FE;&#x7247;&#x5BF9;&#x9F50;</h2>
+<p>Alignment.center:&#x5C45;&#x4E2D;</p>
+<p>Alignment.centerLeft:&#x5C45;&#x5DE6;</p>
+<p>Alignment.centerRight:&#x5C45;&#x53F3;</p>
+<p>Alignment.topCenter:&#x9876;&#x90E8;&#x5C45;&#x4E2D;</p>
+<p>Alignment.topLeft:&#x9876;&#x90E8;&#x5C45;&#x5DE6;</p>
+<p>Alignment.topRight:&#x9876;&#x90E8;&#x5C45;&#x53F3;</p>
+<p>Alignment.bottomCenter:&#x5E95;&#x90E8;&#x5C45;&#x4E2D;</p>
+<p>Alignment.bottomLeft:&#x5E95;&#x90E8;&#x5C45;&#x5DE6;</p>
+<p>Alignment.bottomRight:&#x5E95;&#x90E8;&#x5C45;&#x53F3;</p>
+<h2 id="colorblendmode&#x56FE;&#x7247;&#x989C;&#x8272;&#x53CA;&#x6DF7;&#x5408;&#x6A21;&#x5F0F;"><a name="colorblendmode&#x56FE;&#x7247;&#x989C;&#x8272;&#x53CA;&#x6DF7;&#x5408;&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#colorblendmode&#x56FE;&#x7247;&#x989C;&#x8272;&#x53CA;&#x6DF7;&#x5408;&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>colorBlendMode&#x56FE;&#x7247;&#x989C;&#x8272;&#x53CA;&#x6DF7;&#x5408;&#x6A21;&#x5F0F;</h2>
+<p><a href="media/16214779899749.jpg" data-lightbox="2c2743e7-74a4-4b7f-a7bf-eb74344f641e" data-title="-w331"><img src="media/16214779899749.jpg" alt="-w331"></a></p>
+<p>color&#x4E3A;&#x6E90;&#x56FE;&#x50CF;&#xFF0C;image&#x4E3A;&#x76EE;&#x6807;&#x56FE;&#x50CF;
+BlendMode.clear:&#x4E0D;&#x663E;&#x793A;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x3002;</p>
+<p>BlendMode.src:&#x4EC5;&#x663E;&#x793A;&#x6E90;&#x56FE;&#x50CF;&#x3002;</p>
+<p>BlendMode.dst:&#x4EC5;&#x7ED8;&#x5236;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x3002;</p>
+<p>BlendMode.srcOver:&#x6E90;&#x56FE;&#x663E;&#x793A;&#x5230;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0A;&#xFF0C;&#x6E90;&#x56FE;&#x50CF;&#x5728;&#x4E0A;&#x9762;,&#x900F;&#x660E;&#x533A;&#x57DF;&#x663E;&#x793A;&#x76EE;&#x6807;&#x56FE;&#x5C42;&#x3002;</p>
+<p>BlendMode.dstOver:&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x663E;&#x793A;&#x5728;&#x6E90;&#x56FE;&#x50CF;&#x4E0A;&#xFF0C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x5728;&#x4E0A;&#x9762;&#x3002;</p>
+<p>BlendMode.srcIn: &#x663E;&#x793A;&#x6E90;&#x56FE;&#x50CF;&#x4E14;&#x4EC5;&#x663E;&#x793A;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x91CD;&#x53E0;&#x4F4D;&#x7F6E;&#x3002;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0D;&#x7ED8;&#x5236;&#xFF0C;&#x53EA;&#x6709;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+<p>BlendMode.dstIn:&#x663E;&#x793A;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E14;&#x4EC5;&#x663E;&#x793A;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x91CD;&#x53E0;&#x90E8;&#x5206;&#xFF0C;&#x6E90;&#x56FE;&#x50CF;&#x4E0D;&#x7ED8;&#x5236;&#x53EA;&#x6709;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+<p>BlendMode.srcOut:&#x663E;&#x793A;&#x6E90;&#x56FE;&#x50CF;&#x4E14;&#x4EC5;&#x663E;&#x793A;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x4E0D;&#x91CD;&#x53E0;&#x4F4D;&#x7F6E;&#x3002;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0D;&#x7ED8;&#x5236;&#xFF0C;&#x53EA;&#x6709;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+<p>BlendMode.dstOut:&#x663E;&#x793A;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E14;&#x4EC5;&#x663E;&#x793A;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x4E0D;&#x91CD;&#x53E0;&#x90E8;&#x5206;&#xFF0C;&#x6E90;&#x56FE;&#x50CF;&#x4E0D;&#x7ED8;&#x5236;&#x53EA;&#x6709;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x8D77;&#x4F5C;&#x7528;&#x3002;</p>
+<p>BlendMode.srcATop:&#x5C06;&#x6E90;&#x56FE;&#x50CF;&#x5408;&#x6210;&#x5230;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x4E0A;&#xFF0C;&#x4F46;&#x4EC5;&#x5728;&#x4E0E;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x91CD;&#x53E0;&#x7684;&#x4F4D;&#x7F6E;&#x5408;&#x6210;&#x3002;&#x4F46;&#x662F;&#x8F93;&#x51FA;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x901A;&#x9053;&#x8BBE;&#x7F6E;&#x4E3A;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x901A;&#x9053;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x901A;&#x9053;&#x7684;&#x7EC4;&#x5408;&#x3002;</p>
+<p>BlendMode.dstATop:&#x5C06;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x5408;&#x6210;&#x5230;&#x6E90;&#x56FE;&#x50CF;&#x4E0A;&#xFF0C;&#x4F46;&#x4EC5;&#x5728;&#x4E0E;&#x6E90;&#x56FE;&#x50CF;&#x91CD;&#x53E0;&#x7684;&#x4F4D;&#x7F6E;&#x5408;&#x6210;&#x3002;&#x4F46;&#x662F;&#x5C06;&#x8F93;&#x51FA;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x901A;&#x9053;&#x8BBE;&#x7F6E;&#x4E3A;&#x6E90;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x901A;&#x9053;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5C06;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x901A;&#x9053;&#x7EC4;&#x5408;&#x5728;&#x4E00;&#x8D77;&#x3002;</p>
+<p>BlendMode.xor:&#x5BF9;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x5E94;&#x7528;&#x6309;&#x4F4D;&#x201C; xor&#x201D;&#x8FD0;&#x7B97;&#x7B26;&#x3002;&#x8FD9;&#x5C06;&#x4F7F;&#x5B83;&#x4EEC;&#x91CD;&#x53E0;&#x7684;&#x5730;&#x65B9;&#x4FDD;&#x6301;&#x900F;&#x660E;&#x3002;</p>
+<p>BlendMode.plus:&#x5BF9;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#x6C42;&#x548C;&#x3002;</p>
+<p>BlendMode.modulate:&#x5C06;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x989C;&#x8272;&#x5206;&#x91CF;&#x76F8;&#x4E58;&#x3002;&#x8FD9;&#x53EA;&#x80FD;&#x4EA7;&#x751F;&#x76F8;&#x540C;&#x6216;&#x8F83;&#x6DF1;&#x7684;&#x989C;&#x8272;&#xFF08;&#x4E58;&#x4EE5;&#x767D;&#x8272;1.0&#xFF0C;&#x7ED3;&#x679C;&#x4E0D;&#x53D8;&#xFF1B;&#x4E58;&#x4EE5;&#x9ED1;&#x8272;0.0&#xFF0C;&#x7ED3;&#x679C;&#x9ED1;&#x8272;&#xFF09;&#x3002;&#x5408;&#x6210;&#x4E24;&#x4E2A;&#x4E0D;&#x900F;&#x660E;&#x56FE;&#x50CF;&#x65F6;&#xFF0C;&#x8FD9;&#x4E0E;&#x5728;&#x6295;&#x5F71;&#x673A;&#x4E0A;&#x91CD;&#x53E0;&#x4E24;&#x4E2A;&#x900F;&#x660E;&#x80F6;&#x7247;&#x5177;&#x6709;&#x76F8;&#x4F3C;&#x7684;&#x6548;&#x679C;&#x3002;</p>
+<p>BlendMode.screen:&#x5C06;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x5206;&#x91CF;&#x7684;&#x9006;&#x503C;&#x76F8;&#x4E58;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x7ED3;&#x679C;&#x76F8;&#x9006;&#x3002;&#x53CD;&#x8F6C;&#x5206;&#x91CF;&#x610F;&#x5473;&#x7740;&#x5C06;&#x5B8C;&#x5168;&#x9971;&#x548C;&#x7684;&#x901A;&#x9053;&#xFF08;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x767D;&#x8272;&#xFF09;&#x89C6;&#x4E3A;&#x503C;0.0&#xFF0C;&#x5C06;&#x901A;&#x5E38;&#x89C6;&#x4E3A;0.0&#x7684;&#x503C;&#xFF08;&#x9ED1;&#x8272;&#xFF0C;&#x900F;&#x660E;&#xFF09;&#x89C6;&#x4E3A;1.0&#x3002;&#x8FD9;&#x672C;&#x8D28;&#x4E0A;&#x4E0E;[&#x8C03;&#x5236;]&#x6DF7;&#x5408;&#x6A21;&#x5F0F;&#x76F8;&#x540C;&#xFF0C;&#x4F46;&#x662F;&#x989C;&#x8272;&#x7684;&#x503C;&#x5728;&#x4E58;&#x6CD5;&#x4E4B;&#x524D;&#x5148;&#x53CD;&#x8F6C;&#xFF0C;&#x7ED3;&#x679C;&#x5728;&#x6E32;&#x67D3;&#x524D;&#x5148;&#x53CD;&#x8F6C;&#x3002;&#x8FD9;&#x53EA;&#x80FD;&#x5BFC;&#x81F4;&#x989C;&#x8272;&#x76F8;&#x540C;&#x6216;&#x66F4;&#x6D45;&#xFF08;&#x4E58;&#x4EE5;&#x9ED1;&#x8272;1.0&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x66F4;&#x6539;&#xFF1B;&#x4E58;&#x4EE5;&#x767D;&#x8272;0.0&#x5219;&#x4F1A;&#x5BFC;&#x81F4;&#x767D;&#x8272;&#xFF09;&#x3002;&#x540C;&#x6837;&#xFF0C;&#x5728;Alpha&#x901A;&#x9053;&#x4E2D;&#xFF0C;&#x5B83;&#x53EA;&#x80FD;&#x5BFC;&#x81F4;&#x66F4;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x989C;&#x8272;&#x3002;&#x8FD9;&#x4E0E;&#x4E24;&#x53F0;&#x6295;&#x5F71;&#x673A;&#x5728;&#x540C;&#x4E00;&#x5C4F;&#x5E55;&#x4E0A;&#x540C;&#x65F6;&#x663E;&#x793A;&#x5176;&#x56FE;&#x50CF;&#x7684;&#x6548;&#x679C;&#x76F8;&#x4F3C;&#x3002;</p>
+<p>BlendMode.overlay:&#x5728;&#x5C06;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x5206;&#x91CF;&#x8C03;&#x6574;&#x4E3A;&#x9002;&#x5408;&#x76EE;&#x6807;&#x540E;&#xFF0C;&#x5C06;&#x5B83;&#x4EEC;&#x76F8;&#x4E58;&#x3002;&#x5177;&#x4F53;&#x800C;&#x8A00;&#xFF0C;&#x5982;&#x679C;&#x76EE;&#x6807;&#x503C;&#x8F83;&#x5C0F;&#xFF0C;&#x5219;&#x5C06;&#x5176;&#x4E0E;&#x6E90;&#x503C;&#x76F8;&#x4E58;&#xFF0C;&#x800C;&#x5F53;&#x6E90;&#x503C;&#x8F83;&#x5C0F;&#x65F6;&#xFF0C;&#x5219;&#x5C06;&#x6E90;&#x503C;&#x7684;&#x9006;&#x4E0E;&#x76EE;&#x6807;&#x503C;&#x7684;&#x9006;&#x76F8;&#x4E58;&#xFF0C;&#x7136;&#x540E;&#x6C42;&#x53CD;&#x3002;&#x53CD;&#x8F6C;&#x5206;&#x91CF;&#x610F;&#x5473;&#x7740;&#x5C06;&#x5B8C;&#x5168;&#x9971;&#x548C;&#x7684;&#x901A;&#x9053;&#xFF08;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x767D;&#x8272;&#xFF09;&#x89C6;&#x4E3A;&#x503C;0.0&#xFF0C;&#x5C06;&#x901A;&#x5E38;&#x89C6;&#x4E3A;0.0&#x7684;&#x503C;&#xFF08;&#x9ED1;&#x8272;&#xFF0C;&#x900F;&#x660E;&#xFF09;&#x89C6;&#x4E3A;1.0&#x3002;</p>
+<p>BlendMode.darken:&#x901A;&#x8FC7;&#x4ECE;&#x6BCF;&#x4E2A;&#x989C;&#x8272;&#x901A;&#x9053;&#x4E2D;&#x9009;&#x62E9;&#x6700;&#x5C0F;&#x503C;&#x6765;&#x5408;&#x6210;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;,&#x900F;&#x660E;&#x533A;&#x57DF;&#x663E;&#x793A;&#x76EE;&#x6807;&#x56FE;&#x5C42;&#x3002;</p>
+<p>BlendMode.lighten:&#x901A;&#x8FC7;&#x4ECE;&#x6BCF;&#x4E2A;&#x989C;&#x8272;&#x901A;&#x9053;&#x4E2D;&#x9009;&#x62E9;&#x6700;&#x5927;&#x503C;&#x6765;&#x5408;&#x6210;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;,&#x900F;&#x660E;&#x533A;&#x57DF;&#x663E;&#x793A;&#x76EE;&#x6807;&#x56FE;&#x5C42;&#x3002;</p>
+<p>BlendMode.colorDodge:&#x5C06;&#x76EE;&#x6807;&#x9664;&#x4EE5;&#x6E90;&#x7684;&#x5012;&#x6570;&#x3002;&#x53CD;&#x8F6C;&#x5206;&#x91CF;&#x610F;&#x5473;&#x7740;&#x5C06;&#x5B8C;&#x5168;&#x9971;&#x548C;&#x7684;&#x901A;&#x9053;&#xFF08;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x767D;&#x8272;&#xFF09;&#x89C6;&#x4E3A;&#x503C;0.0&#xFF0C;&#x5C06;&#x901A;&#x5E38;&#x89C6;&#x4E3A;0.0&#x7684;&#x503C;&#xFF08;&#x9ED1;&#x8272;&#xFF0C;&#x900F;&#x660E;&#xFF09;&#x89C6;&#x4E3A;1.0&#x3002;</p>
+<p>BlendMode.colorBurn:&#x5C06;&#x76EE;&#x6807;&#x7684;&#x5012;&#x6570;&#x9664;&#x4EE5;&#x6E90;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x7ED3;&#x679C;&#x5012;&#x6570;&#x3002;&#x53CD;&#x8F6C;&#x5206;&#x91CF;&#x610F;&#x5473;&#x7740;&#x5C06;&#x5B8C;&#x5168;&#x9971;&#x548C;&#x7684;&#x901A;&#x9053;&#xFF08;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x767D;&#x8272;&#xFF09;&#x89C6;&#x4E3A;&#x503C;0.0&#xFF0C;&#x5C06;&#x901A;&#x5E38;&#x89C6;&#x4E3A;0.0&#x7684;&#x503C;&#xFF08;&#x9ED1;&#x8272;&#xFF0C;&#x900F;&#x660E;&#xFF09;&#x89C6;&#x4E3A;1.0&#x3002;</p>
+<p>BlednMode.hardLight:&#x8C03;&#x6574;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x5206;&#x91CF;&#x4EE5;&#x4F7F;&#x5176;&#x9002;&#x5408;&#x6E90;&#x56FE;&#x50CF;&#x540E;&#xFF0C;&#x5C06;&#x5B83;&#x4EEC;&#x76F8;&#x4E58;&#x3002;&#x5177;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x6E90;&#x503C;&#x8F83;&#x5C0F;&#xFF0C;&#x5219;&#x5C06;&#x5176;&#x4E0E;&#x76EE;&#x6807;&#x503C;&#x76F8;&#x4E58;&#xFF0C;&#x800C;&#x5F53;&#x76EE;&#x6807;&#x503C;&#x8F83;&#x5C0F;&#x65F6;&#xFF0C;&#x5219;&#x5C06;&#x76EE;&#x6807;&#x503C;&#x7684;&#x9006;&#x4E0E;&#x6E90;&#x503C;&#x7684;&#x9006;&#x76F8;&#x4E58;&#xFF0C;&#x7136;&#x540E;&#x6C42;&#x53CD;&#x3002;&#x53CD;&#x8F6C;&#x5206;&#x91CF;&#x610F;&#x5473;&#x7740;&#x5C06;&#x5B8C;&#x5168;&#x9971;&#x548C;&#x7684;&#x901A;&#x9053;&#xFF08;&#x4E0D;&#x900F;&#x660E;&#x7684;&#x767D;&#x8272;&#xFF09;&#x89C6;&#x4E3A;&#x503C;0.0&#xFF0C;&#x5C06;&#x901A;&#x5E38;&#x89C6;&#x4E3A;0.0&#x7684;&#x503C;&#xFF08;&#x9ED1;&#x8272;&#xFF0C;&#x900F;&#x660E;&#xFF09;&#x89C6;&#x4E3A;1.0</p>
+<p>BlendMode.softLight: &#x5BF9;&#x4E8E;&#x4F4E;&#x4E8E;0.5&#x7684;&#x6E90;&#x503C;&#x4F7F;&#x7528;[colorDodge]&#xFF0C;&#x5BF9;&#x4E8E;&#x9AD8;&#x4E8E;0.5&#x7684;&#x6E90;&#x503C;&#x4F7F;&#x7528;[colorBurn]&#x3002;&#x4E0E;[overlay]&#x76F8;&#x6BD4;&#xFF0C;&#x8FD9;&#x4F1A;&#x4EA7;&#x751F;&#x76F8;&#x4F3C;&#x4F46;&#x8F83;&#x67D4;&#x548C;&#x7684;&#x6548;&#x679C;</p>
+<p>BlendMode.difference: &#x4ECE;&#x6BCF;&#x4E2A;&#x901A;&#x9053;&#x7684;&#x8F83;&#x5927;&#x503C;&#x4E2D;&#x51CF;&#x53BB;&#x8F83;&#x5C0F;&#x7684;&#x503C;&#x3002;&#x5408;&#x6210;&#x9ED1;&#x8272;&#x6CA1;&#x6709;&#x6548;&#x679C;&#x3002;&#x5408;&#x6210;&#x767D;&#x8272;&#x4F1A;&#x4F7F;&#x53E6;&#x4E00;&#x5F20;&#x56FE;&#x50CF;&#x7684;&#x989C;&#x8272;&#x53CD;&#x8F6C;&#x3002;&#x8F93;&#x51FA;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x7684;&#x8BA1;&#x7B97;&#x65B9;&#x6CD5;&#x4E0E;[srcOver]&#x76F8;&#x540C;&#x3002;</p>
+<p>BlendMode.exclusion: &#x4ECE;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x7684;&#x603B;&#x548C;&#x4E2D;&#x51CF;&#x53BB;&#x4E24;&#x4E2A;&#x56FE;&#x50CF;&#x7684;&#x4E58;&#x79EF;&#x7684;&#x4E24;&#x500D;&#x3002;&#x5408;&#x6210;&#x9ED1;&#x8272;&#x6CA1;&#x6709;&#x6548;&#x679C;&#x3002;&#x5408;&#x6210;&#x767D;&#x8272;&#x4F1A;&#x4F7F;&#x53E6;&#x4E00;&#x5F20;&#x56FE;&#x50CF;&#x7684;&#x989C;&#x8272;&#x53CD;&#x8F6C;&#x3002;&#x8F93;&#x51FA;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x7684;&#x8BA1;&#x7B97;&#x65B9;&#x6CD5;&#x4E0E;[srcOver]&#x76F8;&#x540C;&#x3002;&#x6548;&#x679C;&#x7C7B;&#x4F3C;&#x4E8E;[difference]&#xFF0C;&#x4F46;&#x8F83;&#x67D4;&#x548C;&#x3002;</p>
+<p>BlendMode.multiply: &#x5C06;&#x6E90;&#x56FE;&#x50CF;&#x548C;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x5206;&#x91CF;&#x76F8;&#x4E58;&#xFF0C;&#x5305;&#x62EC;alpha&#x901A;&#x9053;&#x3002;&#x8FD9;&#x53EA;&#x80FD;&#x4EA7;&#x751F;&#x76F8;&#x540C;&#x6216;&#x8F83;&#x6DF1;&#x7684;&#x989C;&#x8272;&#xFF08;&#x4E58;&#x4EE5;&#x767D;&#x8272;1.0&#xFF0C;&#x7ED3;&#x679C;&#x4E0D;&#x53D8;&#xFF1B;&#x4E58;&#x4EE5;&#x9ED1;&#x8272;0.0&#xFF0C;&#x7ED3;&#x679C;&#x9ED1;&#x8272;&#xFF09;&#x3002;&#x7531;&#x4E8E;alpha&#x901A;&#x9053;&#x4E5F;&#x88AB;&#x76F8;&#x4E58;&#xFF0C;&#x56E0;&#x6B64;&#x4E00;&#x5E45;&#x56FE;&#x50CF;&#x4E2D;&#x7684;&#x5168;&#x900F;&#x660E;&#x50CF;&#x7D20;&#xFF08;&#x4E0D;&#x900F;&#x660E;&#x5EA6;0.0&#xFF09;&#x5BFC;&#x81F4;&#x8F93;&#x51FA;&#x4E2D;&#x7684;&#x5168;&#x900F;&#x660E;&#x50CF;&#x7D20;&#x3002;&#x8FD9;&#x7C7B;&#x4F3C;&#x4E8E;[dstIn]&#xFF0C;&#x4F46;&#x5C06;&#x989C;&#x8272;&#x7EC4;&#x5408;&#x5728;&#x4E00;&#x8D77;&#x3002;&#x5BF9;&#x4E8E;&#x591A;&#x79CD;&#x989C;&#x8272;&#x4F46;&#x4E0D;&#x4E58;&#x4EE5;Alpha&#x901A;&#x9053;&#x7684;&#x53D8;&#x4F53;&#xFF0C;&#x8BF7;&#x8003;&#x8651;[modulate]&#x3002;</p>
+<p>BlendMode.hue: &#x83B7;&#x53D6;&#x6E90;&#x56FE;&#x50CF;&#x7684;&#x200B;&#x200B;&#x8272;&#x76F8;&#xFF0C;&#x4EE5;&#x53CA;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x9971;&#x548C;&#x5EA6;&#x548C;&#x5149;&#x5EA6;&#x3002;&#x6548;&#x679C;&#x662F;&#x7528;&#x6E90;&#x56FE;&#x50CF;&#x5BF9;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x8FDB;&#x884C;&#x7740;&#x8272;&#x3002;&#x8F93;&#x51FA;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x7684;&#x8BA1;&#x7B97;&#x65B9;&#x6CD5;&#x4E0E;[srcOver]&#x76F8;&#x540C;&#x3002;&#x6E90;&#x56FE;&#x50CF;&#x4E2D;&#x5B8C;&#x5168;&#x900F;&#x660E;&#x7684;&#x533A;&#x57DF;&#x4F1A;&#x4ECE;&#x76EE;&#x6807;&#x83B7;&#x5F97;&#x5176;&#x76F8;&#x8272;&#x3002;</p>
+<p>BlendMode.saturation: &#x83B7;&#x53D6;&#x6E90;&#x56FE;&#x50CF;&#x7684;&#x200B;&#x200B;&#x9971;&#x548C;&#x5EA6;&#x4EE5;&#x53CA;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x8272;&#x76F8;&#x548C;&#x4EAE;&#x5EA6;&#x3002;&#x8F93;&#x51FA;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x7684;&#x8BA1;&#x7B97;&#x65B9;&#x6CD5;&#x4E0E;[srcOver]&#x76F8;&#x540C;&#x3002;&#x6E90;&#x56FE;&#x50CF;&#x4E2D;&#x5B8C;&#x5168;&#x900F;&#x660E;&#x7684;&#x533A;&#x57DF;&#x4ECE;&#x76EE;&#x6807;&#x4F4D;&#x7F6E;&#x5F00;&#x59CB;&#x9971;&#x548C;&#x3002;</p>
+<p>BlendMode.color: &#x83B7;&#x53D6;&#x6E90;&#x56FE;&#x50CF;&#x7684;&#x200B;&#x200B;&#x8272;&#x76F8;&#x548C;&#x9971;&#x548C;&#x5EA6;&#x4EE5;&#x53CA;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x5149;&#x5EA6;&#x3002;&#x6548;&#x679C;&#x662F;&#x7528;&#x6E90;&#x56FE;&#x50CF;&#x5BF9;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x8FDB;&#x884C;&#x7740;&#x8272;&#x3002;&#x8F93;&#x51FA;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x7684;&#x8BA1;&#x7B97;&#x65B9;&#x6CD5;&#x4E0E;[srcOver]&#x76F8;&#x540C;&#x3002;&#x6E90;&#x56FE;&#x50CF;&#x4E2D;&#x5B8C;&#x5168;&#x900F;&#x660E;&#x7684;&#x533A;&#x57DF;&#x4ECE;&#x76EE;&#x6807;&#x4F4D;&#x7F6E;&#x83B7;&#x5F97;&#x5176;&#x8272;&#x76F8;&#x548C;&#x9971;&#x548C;&#x5EA6;&#x3002;</p>
+<p>BlendMode.luminosity: &#x83B7;&#x53D6;&#x6E90;&#x56FE;&#x50CF;&#x7684;&#x200B;&#x200B;&#x4EAE;&#x5EA6;&#xFF0C;&#x4EE5;&#x53CA;&#x76EE;&#x6807;&#x56FE;&#x50CF;&#x7684;&#x8272;&#x76F8;&#x548C;&#x9971;&#x548C;&#x5EA6;&#x3002;&#x8F93;&#x51FA;&#x56FE;&#x50CF;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5EA6;&#x7684;&#x8BA1;&#x7B97;&#x65B9;&#x6CD5;&#x4E0E;[srcOver]&#x76F8;&#x540C;&#x3002;&#x6E90;&#x56FE;&#x50CF;&#x4E2D;&#x5B8C;&#x5168;&#x900F;&#x660E;&#x7684;&#x533A;&#x57DF;&#x4ECE;&#x76EE;&#x7684;&#x5730;&#x83B7;&#x53D6;&#x5176;&#x4EAE;&#x5EA6;&#x3002;</p>
+<h2 id="centerslice&#x56FE;&#x7247;&#x5C40;&#x90E8;&#x653E;&#x5927;&#xFF1A;"><a name="centerslice&#x56FE;&#x7247;&#x5C40;&#x90E8;&#x653E;&#x5927;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#centerslice&#x56FE;&#x7247;&#x5C40;&#x90E8;&#x653E;&#x5927;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>centerSlice&#x56FE;&#x7247;&#x5C40;&#x90E8;&#x653E;&#x5927;&#xFF1A;</h2>
+<p><a href="media/16214919665196.jpg" data-lightbox="f3b8792a-a52b-45a8-b2b9-74d5b22938a0" data-title=""><img src="media/16214919665196.jpg" alt=""></a></p>
+<p>&#x539F;&#x56FE;&#xFF1A;
+<a href="media/16214919179294.jpg" data-lightbox="5815e0e4-9590-446d-9105-eeee888226f7" data-title=""><img src="media/16214919179294.jpg" alt=""></a></p>
+<p>&#x6548;&#x679C;&#x56FE;&#xFF1A;
+<a href="media/16214918660869.jpg" data-lightbox="4164e2aa-cc53-4ff5-8026-c738cf116738" data-title="-w278"><img src="media/16214918660869.jpg" alt="-w278"></a></p>
+<h1 id="image&#x7684;&#x6E90;&#x7801;"><a name="image&#x7684;&#x6E90;&#x7801;" class="anchor-navigation-ex-anchor" href="#image&#x7684;&#x6E90;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>Image&#x7684;&#x6E90;&#x7801;</h1>
+<p><a href="media/16221102166163.jpg" data-lightbox="c365aaef-644b-49f2-a2f4-39dbf2ab5cf7" data-title="-w673"><img src="media/16221102166163.jpg" alt="-w673"></a>
+&#x5177;&#x4F53;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x65F6;&#x5E8F;&#x56FE;
+<a href="media/16224468958762.jpg" data-lightbox="2dbf42cb-d140-4fe1-a523-0ee29d402e54" data-title="-w348"><img src="media/16224468958762.jpg" alt="-w348"></a>
+&#x4E0B;&#x9762;&#x901A;&#x8FC7;Image.network&#x7684;&#x6E90;&#x7801;&#x6765;&#x770B;&#x4E0B;&#x56FE;&#x7247;&#x662F;&#x5982;&#x4F55;&#x4E0B;&#x8F7D;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x7F13;&#x5B58;&#x7684;</p>
+<pre><code>Image.network(
+    String src, {
+    ...}) : image = ResizeImage.resizeIfNeeded(cacheWidth, cacheHeight, NetworkImage(src, scale: scale, headers: headers)),
+</code></pre><p>NetworkImage&#x4ED6;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>@immutable
+class NetworkImage extends image_provider.ImageProvider&lt;image_provider.NetworkImage&gt; implements image_provider.NetworkImage
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x7F51;&#x7EDC;&#x52A0;&#x8F7D;&#x7684;&#x56FE;&#x7247;&#x548C;AssetImage&#x7B49;&#x90FD;&#x662F;image_provide&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;
+&#x5B83;&#x7684;&#x4E3B;&#x8981;&#x804C;&#x8D23;&#x6709;&#x4E24;&#x4E2A;&#xFF1A;
+&#x63D0;&#x4F9B;&#x56FE;&#x7247;&#x6570;&#x636E;&#x6E90;
+&#x7F13;&#x5B58;&#x56FE;&#x7247;
+&#x4E3B;&#x8981;&#x57FA;&#x7C7B;&#xFF1A;</p>
+<h2 id="resolve&#x65B9;&#x6CD5;"><a name="resolve&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#resolve&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>resolve&#x65B9;&#x6CD5;</h2>
+<pre><code>@nonVirtual
+  ImageStream resolve(ImageConfiguration configuration)
+</code></pre><p> &#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x201C; configuration&#x201D;&#x89E3;&#x6790;&#x6B64;&#x56FE;&#x50CF;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;[ImageStream]&#x3002;&#x8FD9;&#x662F;[ImageProvider]&#x7C7B;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#x7684;&#x516C;&#x5171;&#x5165;&#x53E3;&#x70B9;&#x3002;&#x5B50;&#x7C7B;&#x5E94;&#x5B9E;&#x73B0;&#x6B64;&#x65B9;&#x6CD5;&#x4F7F;&#x7528;&#x7684;[obtainKey]&#x548C;[load]&#x3002;&#x5982;&#x679C;&#x4ED6;&#x4EEC;&#x9700;&#x8981;&#x66F4;&#x6539;&#x4F7F;&#x7528;&#x7684;[ImageStream]&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5219;&#x5E94;&#x91CD;&#x5199;[createStream]&#x3002;&#x5982;&#x679C;&#x4ED6;&#x4EEC;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x56FE;&#x50CF;&#x7684;&#x5B9E;&#x9645;&#x5206;&#x8FA8;&#x7387;&#xFF0C;&#x5219;&#x5E94;&#x91CD;&#x5199;[resolveStreamForKey]&#x3002;</p>
+<p> ImageConfiguration &#x5305;&#x542B;&#x56FE;&#x7247;&#x548C;&#x8BBE;&#x5907;&#x7684;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#xFF0C;&#x5982;&#x56FE;&#x7247;&#x7684;&#x5927;&#x5C0F;&#x3001;&#x6240;&#x5728;&#x7684;AssetBundle(&#x53EA;&#x6709;&#x6253;&#x5230;&#x5B89;&#x88C5;&#x5305;&#x7684;&#x56FE;&#x7247;&#x5B58;&#x5728;)&#x4EE5;&#x53CA;&#x5F53;&#x524D;&#x7684;&#x8BBE;&#x5907;&#x5E73;&#x53F0;&#x3001;devicePixelRatio&#xFF08;&#x8BBE;&#x5907;&#x50CF;&#x7D20;&#x6BD4;&#x7B49;&#xFF09;&#x3002;Flutter SDK&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x4FBF;&#x6377;&#x51FD;&#x6570;createLocalImageConfiguration&#x6765;&#x521B;&#x5EFA;ImageConfiguration &#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code>@immutable
+class ImageConfiguration {
+
+  const ImageConfiguration({
+    this.bundle,
+    this.devicePixelRatio,
+    this.locale,
+    this.textDirection,
+    this.size,
+    this.platform,
+  });
+</code></pre><h2 id="&#x5177;&#x4F53;&#x770B;&#x4E0B;resolve&#x65B9;&#x6CD5;"><a name="&#x5177;&#x4F53;&#x770B;&#x4E0B;resolve&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#&#x5177;&#x4F53;&#x770B;&#x4E0B;resolve&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5177;&#x4F53;&#x770B;&#x4E0B;resolve&#x65B9;&#x6CD5;</h2>
+<pre><code> ImageStream resolve(ImageConfiguration configuration) {
+ ...
+ _createErrorHandlerAndKey(
+      configuration,
+      (T key, ImageErrorListener errorHandler) {
+        resolveStreamForKey(configuration, stream, key, errorHandler);
+      },
+ }
+</code></pre><p> &#x5BF9;&#x5E94;resolveStreamForKey&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code>@protected
+  void resolveStreamForKey(ImageConfiguration configuration, ImageStream stream, T key, ImageErrorListener handleError) {
+    if (stream.completer != null) {
+      final ImageStreamCompleter? completer = PaintingBinding.instance!.imageCache!.putIfAbsent(
+        key,
+        () =&gt; stream.completer!,
+        onError: handleError,
+      );
+      assert(identical(completer, stream.completer));
+      return;
+    }
+    final ImageStreamCompleter? completer = PaintingBinding.instance!.imageCache!.putIfAbsent(
+      key,
+      () =&gt; load(key, PaintingBinding.instance!.instantiateImageCodec),
+      onError: handleError,
+    );
+    if (completer != null) {
+      stream.setCompleter(completer);
+    }
+  }
+</code></pre><p>&#x6709;&#x7F13;&#x5B58;&#x5219;&#x4F7F;&#x7528;&#x7F13;&#x5B58;&#xFF0C;&#x6CA1;&#x6709;&#x7F13;&#x5B58;&#x5219;&#x8C03;&#x7528;load&#x65B9;&#x6CD5;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#xFF0C;&#x52A0;&#x8F7D;&#x6210;&#x529F;&#x540E;:</p>
+<p>&#x5148;&#x5224;&#x65AD;&#x56FE;&#x7247;&#x6570;&#x636E;&#x6709;&#x6CA1;&#x6709;&#x7F13;&#x5B58;&#xFF0C;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;ImageStream&#x3002;
+&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7F13;&#x5B58;&#xFF0C;&#x5219;&#x8C03;&#x7528;load(T key)&#x65B9;&#x6CD5;&#x4ECE;&#x6570;&#x636E;&#x6E90;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x6570;&#x636E;&#xFF0C;&#x52A0;&#x8F7D;&#x6210;&#x529F;&#x540E;&#x5148;&#x7F13;&#x5B58;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;ImageStream&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7684;PaintingBinding.instance.imageCache &#x662F; ImageCache&#x7684;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#xFF0C;&#x5B83;&#x662F;PaintingBinding&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x800C;Flutter&#x6846;&#x67B6;&#x4E2D;&#x7684;PaintingBinding.instance&#x662F;&#x4E00;&#x4E2A;&#x5355;&#x4F8B;&#xFF0C;imageCache&#x4E8B;&#x5B9E;&#x4E0A;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x5355;&#x4F8B;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x56FE;&#x7247;&#x7F13;&#x5B58;&#x662F;&#x5168;&#x5C40;&#x7684;&#xFF0C;&#x7EDF;&#x4E00;&#x7531;PaintingBinding.instance.imageCache &#x6765;&#x7BA1;&#x7406;&#x3002;</p>
+<p>&#x6765;&#x770B;&#x4E00;&#x4E0B;ImageCache</p>
+<pre><code>const int _kDefaultSize = 1000;
+const int _kDefaultSizeBytes = 100 &lt;&lt; 20; // 100 MiB
+class ImageCache {
+  final Map&lt;Object, _PendingImage&gt; _pendingImages = &lt;Object, _PendingImage&gt;{};//&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x4E2D;&#x7684;&#x56FE;&#x7247;&#x961F;&#x5217;
+  final Map&lt;Object, _CachedImage&gt; _cache = &lt;Object, _CachedImage&gt;{};//&#x7F13;&#x5B58;&#x961F;&#x5217;
+  final Map&lt;Object, _LiveImage&gt; _liveImages = &lt;Object, _LiveImage&gt;{};//&#x6D3B;&#x52A8;&#x7684;&#x56FE;&#x7247;&#x961F;&#x5217;
+  int get maximumSize =&gt; _maximumSize;
+  int _maximumSize = _kDefaultSize;
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF1A;
+_pendingImages&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x4E2D;&#x7684;&#x56FE;&#x7247;&#x961F;&#x5217;
+_cache&#x7F13;&#x5B58;&#x961F;&#x5217;
+&#x7F13;&#x5B58;&#x56FE;&#x7247;&#x4E0A;&#x7EBF;1000&#x5F20;&#xFF0C;&#x6700;&#x5927;&#x7F13;&#x5B58;100M</p>
+<pre><code>ImageStreamCompleter? putIfAbsent(Object key, ImageStreamCompleter loader(), { ImageErrorListener? onError }) {
+    ImageStreamCompleter? result = _pendingImages[key]?.completer;
+    // &#x5982;&#x679C;&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x961F;&#x5217;&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x8FD8;&#x6CA1;&#x6709;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;
+    if (result != null) {
+      return result;
+    }
+    // &#x5148;&#x5220;&#x9664;&#x65E7;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x4EE5;&#x4FBF;&#x540E;&#x9762;&#x91CD;&#x65B0;&#x52A0;&#x5230;&#x6700;&#x8FD1;&#x4F7F;&#x7528;&#x7684;&#x4F4D;&#x7F6E;
+    final _CachedImage? image = _cache.remove(key);
+    if (image != null) {
+      _cache[key] = image;
+      return image.completer;
+    }
+    //&#x5982;&#x679C;&#x6D3B;&#x52A8;&#x56FE;&#x7247;&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x8FD4;&#x56DE;&#x6D3B;&#x52A8;&#x56FE;&#x7247;
+    final _LiveImage? liveImage = _liveImages[key];
+    if (liveImage != null) {
+        return liveImage.completer;
+    }
+    //&#x4EE5;&#x4E0A;&#x90FD;&#x6CA1;&#x6709;&#x5219;&#x8C03;&#x7528;load&#x52A0;&#x8F7D;
+    try {
+      result = loader();
+    } catch (error, stackTrace) {
+      if(onError != null) {
+        onError(error, stackTrace);
+        return null;
+      } else {
+        rethrow;
+      }
+    }
+    // &#x8FD9;&#x91CC;&#x8BBE;&#x7F6E;&#x76D1;&#x542C;&#x5668;&#x4E3A;false
+    bool listenedOnce = false;
+    // &#x5982;&#x679C;&#x56FE;&#x7247;&#x7F13;&#x5B58;&#x4E0D;&#x53EF;&#x7528;&#xFF0C;&#x4E5F;&#x4E0D;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x7684;&#x56FE;&#x7247;&#x961F;&#x5217;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x81F3;&#x5C11;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668;&#x76D1;&#x542C;&#x56FE;&#x7247;&#xFF0C;&#x5426;&#x5219;&#x6D3B;&#x52A8;&#x56FE;&#x7247;&#x4F1A;&#x6709;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x98CE;&#x9669; 
+    _PendingImage? untrackedPendingImage;
+    void listener(ImageInfo? info, bool syncCall) {
+      int? sizeBytes;
+      if (info != null) {
+        sizeBytes = info.image.height * info.image.width * 4;
+        info.dispose();
+      }
+      final _CachedImage image = _CachedImage(
+        result!,
+        sizeBytes: sizeBytes,
+      );
+    //&#x8FFD;&#x8E2A;&#x6D3B;&#x52A8;&#x56FE;&#x7247;
+      _trackLiveImage(key, result, sizeBytes);
+      // &#x5982;&#x679C;&#x521D;&#x6B21;&#x8C03;&#x7528;resolve&#x65F6;&#x7F13;&#x5B58;&#x4E86;&#x90A3;&#x4E48;&#x53EA;&#x8FFD;&#x8E2A;&#x56FE;&#x7247;
+      if (untrackedPendingImage == null) {
+        _touch(key, image, listenerTask);
+      } else {
+        image.dispose();
+      }
+      //&#x5982;&#x679C;&#x6CA1;&#x6709;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x5219;&#x79FB;&#x9664;&#x76D1;&#x542C;
+      final _PendingImage? pendingImage = untrackedPendingImage ?? _pendingImages.remove(key);
+      if (pendingImage != null) {
+        pendingImage.removeListener();
+      }
+      //&#x76D1;&#x542C;&#x72B6;&#x6001;&#x7F6E;&#x4E3A;true
+      listenedOnce = true;
+    }
+    //&#x7ED9;&#x56FE;&#x7247;&#x6DFB;&#x52A0;&#x76D1;&#x542C;
+    final ImageStreamListener streamListener = ImageStreamListener(listener);
+    if (maximumSize &gt; 0 &amp;&amp; maximumSizeBytes &gt; 0) {
+      _pendingImages[key] = _PendingImage(result, streamListener);
+    } else {
+      untrackedPendingImage = _PendingImage(result, streamListener);
+    }
+    // &#x6DFB;&#x52A0;&#x76D1;&#x542C;&#x5668;
+    result.addListener(streamListener);
+    return result;
+  }
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x8FD9;&#x91CC;&#x68C0;&#x6D4B;&#x7F13;&#x5B58;&#x56FE;&#x7247;&#x662F;&#x5426;&#x5B58;&#x5728;&#xFF0C;&#x5B58;&#x5728;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x5220;&#x6389;&#x7F13;&#x5B58;&#x4E2D;&#x5BF9;&#x5E94;&#x7684;key&#xFF0C;&#x7136;&#x540E;&#x7F13;&#x5B58;&#x56FE;&#x7247;&#x3002;</p>
+<p>//&#x4E0B;&#x9762;&#x68C0;&#x6D4B;&#x7F13;&#x5B58;&#x65B9;&#x6CD5;</p>
+<pre><code> void _checkCacheSize(TimelineTask? timelineTask) {
+    final Map&lt;String, dynamic&gt; finishArgs = &lt;String, dynamic&gt;{};
+    TimelineTask? checkCacheTask;
+    while (_currentSizeBytes &gt; _maximumSizeBytes || _cache.length &gt; _maximumSize) {
+      final Object key = _cache.keys.first;
+      final _CachedImage image = _cache[key]!;
+      _currentSizeBytes -= image.sizeBytes!;
+      image.dispose();
+      _cache.remove(key);
+    }
+  }
+</code></pre><p>&#x5F53;&#x7F13;&#x5B58;&#x6570;&#x91CF;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x503C;&#x6216;&#x7F13;&#x5B58;&#x5927;&#x5C0F;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x7F13;&#x5B58;&#x5BB9;&#x91CF;&#xFF0C;&#x5219;&#x4F1A;&#x6E05;&#x7406;&#x5230;&#x7F13;&#x5B58;&#x4E0A;&#x9650;&#x4EE5;&#x5185;&#x3002;</p>
+<h2 id="obtainkey&#x65B9;&#x6CD5;"><a name="obtainkey&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#obtainkey&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>obtainKey&#x65B9;&#x6CD5;</h2>
+<p>Future<t> obtainKey(ImageConfiguration configuration);
+&#x8BE5;&#x63A5;&#x53E3;&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x914D;&#x5408;&#x5B9E;&#x73B0;&#x56FE;&#x7247;&#x7F13;&#x5B58;&#xFF0C;ImageProvider&#x4ECE;&#x6570;&#x636E;&#x6E90;&#x52A0;&#x8F7D;&#x5B8C;&#x6570;&#x636E;&#x540E;&#xFF0C;&#x4F1A;&#x5728;&#x5168;&#x5C40;&#x7684;ImageCache&#x4E2D;&#x7F13;&#x5B58;&#x56FE;&#x7247;&#x6570;&#x636E;&#xFF0C;&#x800C;&#x56FE;&#x7247;&#x6570;&#x636E;&#x7F13;&#x5B58;&#x662F;&#x4E00;&#x4E2A;Map&#xFF0C;&#x800C;Map&#x7684;key&#x4FBF;&#x662F;&#x8C03;&#x7528;&#x6B64;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x4E0D;&#x540C;&#x7684;key&#x4EE3;&#x8868;&#x4E0D;&#x540C;&#x7684;&#x56FE;&#x7247;&#x6570;&#x636E;&#x7F13;&#x5B58;&#x3002;&#x5BF9;&#x5E94;&#x5B9E;&#x73B0;&#xFF1A;</t></p>
+<pre><code>@override
+  Future&lt;NetworkImage&gt; obtainKey(image_provider.ImageConfiguration configuration) {
+    return SynchronousFuture&lt;NetworkImage&gt;(this);
+  }
+</code></pre><p>&#x56E0;&#x4E3A;Map&#x4E2D;&#x5728;&#x5224;&#x65AD;key&#xFF08;&#x6B64;&#x65F6;&#x662F;NetworkImage&#x5BF9;&#x8C61;&#xFF09;&#x662F;&#x5426;&#x76F8;&#x7B49;&#x65F6;&#x4F1A;&#x4F7F;&#x7528;&quot;=&quot;&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x90A3;&#x4E48;&#x5B9A;&#x4E49;key&#x7684;&#x903B;&#x8F91;&#x5C31;&#x662F;NetworkImage&#x7684;&#x201C;==&#x201D;&#x8FD0;&#x7B97;&#x7B26;&#xFF1A;</p>
+<pre><code> @override
+  bool operator ==(Object other) {
+    if (other.runtimeType != runtimeType)
+      return false;
+    return other is NetworkImage
+        &amp;&amp; other.url == url
+        &amp;&amp; other.scale == scale;
+  }
+</code></pre><p>  &#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x770B;&#x51FA;key&#x662F;&#x7531;url+scale&#x51B3;&#x5B9A;&#x7684;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;url&#x4E0D;&#x540C;scale&#x4F1A;&#x91CD;&#x590D;&#x4E0B;&#x8F7D;&#x3002;</p>
+<h2 id="load&#x65B9;&#x6CD5;"><a name="load&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#load&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>load&#x65B9;&#x6CD5;</h2>
+<pre><code> @protected
+  ImageStreamCompleter load(T key, DecoderCallback decode);
+</code></pre><p>&#x5C06;&#x5BC6;&#x94A5;&#x8F6C;&#x6362;&#x4E3A;[ImageStreamCompleter]&#xFF0C;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x83B7;&#x53D6;&#x56FE;&#x50CF;&#x3002; [decode]&#x56DE;&#x8C03;&#x63D0;&#x4F9B;&#x4E86;&#x83B7;&#x53D6;&#x56FE;&#x50CF;&#x7F16;&#x89E3;&#x7801;&#x5668;&#x7684;&#x903B;&#x8F91;&#x3002;
+load&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x662F;ImageStreamCompleter &#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x5B9A;&#x4E49;&#x4E86;&#x7BA1;&#x7406;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x7684;&#x4E00;&#x4E9B;&#x63A5;&#x53E3;&#xFF0C;Image Widget&#x4E2D;&#x6B63;&#x662F;&#x901A;&#x8FC7;&#x5B83;&#x6765;&#x76D1;&#x542C;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x72B6;&#x6001;&#x7684;&#x3002;</p>
+<p>MultiFrameImageStreamCompleter &#x662F; ImageStreamCompleter&#x7684;&#x4E00;&#x4E2A;&#x5B50;&#x7C7B;&#xFF0C;&#x662F;flutter sdk&#x9884;&#x7F6E;&#x7684;&#x7C7B;&#xFF0C;&#x901A;&#x8FC7;&#x8BE5;&#x7C7B;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x65B9;&#x4FBF;&#x3001;&#x8F7B;&#x677E;&#x5730;&#x521B;&#x5EFA;&#x51FA;&#x4E00;&#x4E2A;ImageStreamCompleter&#x5B9E;&#x4F8B;&#x6765;&#x505A;&#x4E3A;load&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x5B50;&#x7C7B;NetworkImage&#x5B9E;&#x73B0;load</p>
+<pre><code> @override
+  ImageStreamCompleter load(image_provider.NetworkImage key, image_provider.DecoderCallback decode) {
+    // Ownership of this controller is handed off to [_loadAsync]; it is that
+    // method&apos;s responsibility to close the controller&apos;s stream when the image
+    // has been loaded or an error is thrown.
+    final StreamController&lt;ImageChunkEvent&gt; chunkEvents = StreamController&lt;ImageChunkEvent&gt;();
+
+    return MultiFrameImageStreamCompleter(
+      codec: _loadAsync(key as NetworkImage, chunkEvents, decode),
+</code></pre><p>&#x5177;&#x4F53;_loadAsync&#x5B9E;&#x73B0;</p>
+<pre><code> Future&lt;ui.Codec&gt; _loadAsync(
+    NetworkImage key,
+    StreamController&lt;ImageChunkEvent&gt; chunkEvents,
+    image_provider.DecoderCallback decode,
+  ) async {
+    try {
+    //&#x89E3;&#x6790;url
+      final Uri resolved = Uri.base.resolve(key.url);
+    //&#x8BF7;&#x6C42;&#x7F51;&#x7EDC;
+      final HttpClientRequest request = await _httpClient.getUrl(resolved);
+
+      headers?.forEach((String name, String value) {
+        request.headers.add(name, value);
+      });
+      final HttpClientResponse response = await request.close();
+     //&#x5C06;HttpClientResponse&#x7684;&#x54CD;&#x5E94;&#x4E3B;&#x4F53;&#x8F6C;&#x6362;&#x4E3A;Uint8List &#x3002;&#x8FD4;&#x56DE;&#x7684;Future&#x5C06;&#x8F6C;&#x53D1;response&#x53D1;&#x51FA;&#x7684;&#x4EFB;&#x4F55;&#x9519;&#x8BEF;&#x3002;
+      final Uint8List bytes = await consolidateHttpClientResponseBytes(
+        response,
+        onBytesReceived: (int cumulative, int? total) {
+          chunkEvents.add(ImageChunkEvent(
+            cumulativeBytesLoaded: cumulative,
+            expectedTotalBytes: total,
+          ));
+        },
+      );
+      return decode(bytes);
+    } catch (e) {
+     //&#x6DFB;&#x52A0;&#x5FAE;&#x4EFB;&#x52A1;&#xFF0C;&#x79FB;&#x9664;&#x5BF9;&#x5E94;&#x7F13;&#x5B58;
+      scheduleMicrotask(() {
+        PaintingBinding.instance!.imageCache!.evict(key);
+      });
+      rethrow;
+    } finally {
+      chunkEvents.close();
+    }
+  }
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;_loadAsync&#x65B9;&#x6CD5;&#x4E3B;&#x8981;&#x505A;&#x4E86;&#x4E24;&#x4EF6;&#x4E8B;&#xFF1A;
+1.&#x4E0B;&#x8F7D;&#x56FE;&#x7247;&#x3002;
+2.&#x5BF9;&#x4E0B;&#x8F7D;&#x7684;&#x56FE;&#x7247;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x89E3;&#x7801;&#x3002;
+&#x8FD9;&#x91CC;&#x83B7;&#x53D6;&#x56FE;&#x7247;&#xFF0C;&#x89E3;&#x7801;&#x56FE;&#x7247;&#x3002;&#x5177;&#x4F53;&#x89E3;&#x7801;&#x56FE;&#x7247;&#x662F;&#x5E95;&#x5C42;&#x505A;&#x7684;&#x3002;</p>
+<pre><code>@pragma(&apos;vm:entry-point&apos;)
+class Codec extends NativeFieldWrapperClass2 {
+  //&#x6B64;&#x7C7B;&#x662F;&#x7531;&#x5F15;&#x64CE;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x4E0D;&#x5E94;&#x76F4;&#x63A5;&#x5B9E;&#x4F8B;&#x5316;&#x6216;&#x6269;&#x5C55;&#x3002;&#x8981;&#x83B7;&#x53D6;[Codec]&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x8BF7;&#x53C2;&#x89C1;[instantiateImageCodec]&#x3002;
+  @pragma(&apos;vm:entry-point&apos;)
+  Codec._();
+
+  int? _cachedFrameCount;
+  /// &#x8BB0;&#x5F55;&#x8BE5;&#x56FE;&#x50CF;&#x5E27;&#x6570;
+  int get frameCount =&gt; _cachedFrameCount ??= _frameCount;
+  int get _frameCount native &apos;Codec_frameCount&apos;;
+
+  int? _cachedRepetitionCount;
+  /// &#x52A8;&#x753B;&#x91CD;&#x590D;&#x6B21;&#x6570;
+  ///
+  /// * 0 &#x52A8;&#x753B;&#x64AD;&#x653E;&#x4E00;&#x6B21;.
+  /// * -1 &#x65E0;&#x9650;&#x91CD;&#x590D;.
+  int get repetitionCount =&gt; _cachedRepetitionCount ??= _repetitionCount;
+  int get _repetitionCount native &apos;Codec_repetitionCount&apos;;
+
+  /// &#x83B7;&#x53D6;&#x4E0B;&#x4E00;&#x4E2A;&#x52A8;&#x753B;&#x5E27;&#x3002;&#x8FD4;&#x56DE;&#x6700;&#x540E;&#x4E00;&#x5E27;&#x540E;&#x8FD4;&#x56DE;&#x5230;&#x7B2C;&#x4E00;&#x5E27;&#x3002;&#x5982;&#x679C;&#x89E3;&#x7801;&#x5931;&#x8D25;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x7684;future&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x3002;&#x6B64;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x8005;&#x8D1F;&#x8D23;&#x5C06;[FrameInfo.image]&#x653E;&#x7F6E;&#x5728;&#x8FD4;&#x56DE;&#x7684;&#x5BF9;&#x8C61;&#x4E0A;
+  Future&lt;FrameInfo&gt; getNextFrame() async {
+    final Completer&lt;FrameInfo&gt; completer = Completer&lt;FrameInfo&gt;.sync();
+    final String? error = _getNextFrame((_Image? image, int durationMilliseconds) {
+      if (image == null) {
+        completer.completeError(Exception(&apos;Codec failed to produce an image, possibly due to invalid image data.&apos;));
+      } else {
+        completer.complete(FrameInfo._(
+          image: Image._(image),
+          duration: Duration(milliseconds: durationMilliseconds),
+        ));
+      }
+    });
+    if (error != null) {
+      throw Exception(error);
+    }
+    return await completer.future;
+  }
+
+  /// &#x5982;&#x679C;&#x5931;&#x8D25;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#xFF0C;&#x5982;&#x679C;&#x6210;&#x529F;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null
+  String? _getNextFrame(void Function(_Image?, int) callback) native &apos;Codec_getNextFrame&apos;;
+
+  /// &#x91CA;&#x653E;&#x8BE5;&#x5BF9;&#x8C61;&#x4F7F;&#x7528;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x8C03;&#x7528;&#x6B64;&#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x8BE5;&#x5BF9;&#x8C61;&#x4E0D;&#x518D;&#x53EF;&#x7528;
+  void dispose() native &apos;Codec_dispose&apos;;
+}
+</code></pre><p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;Codec&#x6700;&#x7EC8;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#xFF08;&#x52A8;&#x56FE;&#xFF09;&#x5E27;&#xFF0C;&#x800C;&#x8FD9;&#x4E9B;&#x5E27;&#x6700;&#x7EC8;&#x4F1A;&#x7ED8;&#x5236;&#x5230;&#x5C4F;&#x5E55;&#x4E0A;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x56FE;&#x7247;&#x7F13;&#x5B58;&#x662F;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x8FDB;&#x884C;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x7F51;&#x7EDC;&#x56FE;&#x7247;&#x5728;&#x5E94;&#x7528;&#x91CD;&#x542F;&#x540E;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x8054;&#x7F51;&#x4E0B;&#x8F7D;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<h1 id="image&#x7B2C;&#x4E09;&#x65B9;&#x63A7;&#x4EF6;"><a name="image&#x7B2C;&#x4E09;&#x65B9;&#x63A7;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#image&#x7B2C;&#x4E09;&#x65B9;&#x63A7;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>Image&#x7B2C;&#x4E09;&#x65B9;&#x63A7;&#x4EF6;</h1>
+<h2 id="fluttersvg&#x63A7;&#x4EF6;"><a name="fluttersvg&#x63A7;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#fluttersvg&#x63A7;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>flutter_svg&#x63A7;&#x4EF6;</h2>
+<p>&#x5BF9;&#x4E8E;flutter_svg&#x8FD9;&#x4E2A;&#x63A7;&#x4EF6;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x770B;&#x8FC7;flutter&#x539F;&#x751F;&#x7684;image&#x7684;&#x89E3;&#x6790;&#x548C;&#x7F13;&#x5B58;&#x8FC7;&#x7A0B;&#x4E86;&#xFF0C;&#x5728;&#x770B;&#x8FD9;&#x4E2A;&#x63A7;&#x4EF6;&#x5C31;&#x5F88;&#x7B80;&#x5355;&#x4E86;&#x3002;&#x9996;&#x5148;&#x6211;&#x4EEC;&#x770B;&#x4E0B;&#x8FD9;&#x4E2A;&#x63A7;&#x4EF6;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x7684;&#x51E0;&#x4E2A;&#x57FA;&#x672C;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x3002;
+<a href="media/16215862124426.jpg" data-lightbox="eb1d7ec4-ecd1-404f-9a67-0cd3f07ec29e" data-title=""><img src="media/16215862124426.jpg" alt=""></a>
+&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E86;&#x8FD9;&#x4E09;&#x79CD;&#x52A0;&#x8F7D;svg&#x7684;&#x65B9;&#x6CD5;&#x3002;
+&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x4E5F;&#x4ECE;SvgPicture.network&#x6765;&#x4E86;&#x89E3;flutter_svg&#x7684;&#x6E90;&#x7801;&#x3002;</p>
+<h3 id="svgpicturenetwork&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;svg&#x56FE;&#x7247;"><a name="svgpicturenetwork&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;svg&#x56FE;&#x7247;" class="anchor-navigation-ex-anchor" href="#svgpicturenetwork&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;svg&#x56FE;&#x7247;"><i class="fa fa-link" aria-hidden="true"></i></a>SvgPicture.network&#x52A0;&#x8F7D;&#x7F51;&#x7EDC;svg&#x56FE;&#x7247;</h3>
+<p>&#x9996;&#x5148;&#x770B;&#x5230;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5B58;&#x5728;&#x4E8E;SvgPicture&#x8FD9;&#x4E2A;&#x7C7B;&#x91CC;&#x3002;</p>
+<pre><code>SvgPicture.network(
+    String url, {
+   ...  })  : pictureProvider = NetworkPicture(
+          allowDrawingOutsideViewBox == true
+              ? svgByteDecoderOutsideViewBox
+              : svgByteDecoder,
+          url,
+          headers: headers,
+          colorFilter: svg.cacheColorFilterOverride ?? cacheColorFilter
+              ? _getColorFilter(color, colorBlendMode)
+              : null,
+        ),
+        colorFilter = _getColorFilter(color, colorBlendMode),
+        super(key: key);
+</code></pre><p>&#x7136;&#x540E;SvgPicture &#x4ED6;&#x662F;&#x4E00;&#x4E2A;StatefulWidget&#xFF0C;&#x7136;&#x540E;&#x8FD9;&#x4E2A;&#x7C7B;&#x4ED6;&#x5FC5;&#x7136;&#x540E;build&#x548C;createState&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x53BB;&#x770B;&#x4ED6;&#x7684;build&#x65B9;&#x6CD5;</p>
+<pre><code> @override
+  Widget build(BuildContext context) {
+    late Widget child;
+    if (_picture != null) {
+      final Rect viewport = Offset.zero &amp; _picture!.viewport.size;
+
+      ...      
+      child = SizedBox(
+        width: width,
+        height: height,
+        child: FittedBox(
+          fit: widget.fit,
+          alignment: widget.alignment,
+          clipBehavior: widget.clipBehavior,
+          child: SizedBox.fromSize(
+            size: viewport.size,
+            child: RawPicture(
+              _picture,
+              matchTextDirection: widget.matchTextDirection,
+              allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
+            ),
+          ),
+        ),
+      );
+
+      ...
+    return child;
+  }
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;build&#x662F;&#x7ED8;&#x5236;&#x7684;_picture&#x7136;&#x540E;&#x753B;&#x51FA;&#x6765;&#x7684;svg&#x56FE;&#x7247;&#xFF0C;&#x8FD9;&#x91CC;_picture&#x662F;&#x4E00;&#x4E2A;&#x5305;&#x542B;Picture&#x7684;&#x7528;&#x6765;&#x7ED8;&#x5236;&#x5230;canvas&#x4E0A;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x3002;</p>
+<pre><code>@immutable
+class PictureInfo {
+  /// Creates a new PictureInfo object.
+  const PictureInfo({
+    required this.picture,
+    required this.viewport,
+    this.size = Size.infinite,
+  })  : assert(picture != null), // ignore: unnecessary_null_comparison
+        assert(viewport != null), // ignore: unnecessary_null_comparison
+        assert(size != null); // ignore: unnecessary_null_comparison
+</code></pre><p>Picture&#x5219;&#x662F;&#x8868;&#x793A;&#x8BB0;&#x5F55;&#x7684;&#x56FE;&#x5F62;&#x64CD;&#x4F5C;&#x5E8F;&#x5217;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;[SceneBuilder]&#x5C06;[Picture]&#x653E;&#x7F6E;&#x5728;[Scene]&#x4E2D;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;[Canvas.drawPicture]&#x65B9;&#x6CD5;&#x5C06;[Picture]&#x7ED8;&#x5236;&#x5230;[Canvas]&#x4E2D;&#x3002;</p>
+<h3 id="url&#x4E2D;&#x7684;byte&#x52A0;&#x8F7D;&#x5230;pictureinfo&#x6D41;&#x7A0B;"><a name="url&#x4E2D;&#x7684;byte&#x52A0;&#x8F7D;&#x5230;pictureinfo&#x6D41;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#url&#x4E2D;&#x7684;byte&#x52A0;&#x8F7D;&#x5230;pictureinfo&#x6D41;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>URL&#x4E2D;&#x7684;byte&#x52A0;&#x8F7D;&#x5230;PictureInfo&#x6D41;&#x7A0B;</h3>
+<pre><code> SvgPicture.network(
+    String url, {
+   ...  })  : pictureProvider = NetworkPicture(
+          allowDrawingOutsideViewBox == true
+              ? svgByteDecoderOutsideViewBox
+              : svgByteDecoder,
+          url,
+          headers: headers,
+</code></pre><p>&#x9996;&#x5148;&#x770B;&#x5230;NetworkPicture&#x662F;&#x4ECE;PictureProvider&#x5B9E;&#x73B0;&#x8FC7;&#x6765;&#x7684;&#x3002;</p>
+<pre><code>@optionalTypeArgs
+abstract class PictureProvider&lt;T&gt; {
+   const PictureProvider(this.colorFilter);
+    //&#x56FE;&#x7247;&#x7F13;&#x5B58;
+  static final PictureCache cache = PictureCache();
+
+  /// &#x7F13;&#x5B58;&#x4E2A;&#x6570;
+  @Deprecated
+  static int get cacheCount =&gt; cache.count;
+
+  /// &#x6E05;&#x7A7A;&#x7F13;&#x5B58;
+  @Deprecated(&apos;Use the `cache` object directly instead.&apos;)
+  static void clearCache() =&gt; cache.clear();
+
+  /// &#x989C;&#x8272;&#x8FC7;&#x6EE4;
+  final ColorFilter? colorFilter;
+
+  /// &#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;configuration&#x89E3;&#x6790;&#x6B64;Picture&#x63D0;&#x4F9B;&#x7A0B;&#x5E8F;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;PictureStream &#x3002;
+/// &#x8FD9;&#x662F;PictureProvider&#x7C7B;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#x7684;&#x516C;&#x5171;&#x5165;&#x53E3;&#x70B9;&#x3002;
+/// &#x5B50;&#x7C7B;&#x5E94;&#x5B9E;&#x73B0;&#x6B64;&#x65B9;&#x6CD5;&#x4F7F;&#x7528;&#x7684;obtainKey&#x548C;load 
+  PictureStream resolve(PictureConfiguration picture,
+      {PictureErrorListener? onError}) {
+     }
+
+  /// &#x5C06;pictureProvider&#x7684;&#x8BBE;&#x7F6E;&#x4EE5;&#x53CA;pictureConfiguration&#x8F6C;&#x6362;&#x4E3A;&#x63CF;&#x8FF0;&#x8981;&#x52A0;&#x8F7D;&#x7684;&#x7CBE;&#x786E;&#x56FE;&#x7247;&#x7684;&#x952E;&#x3002;&#x5BC6;&#x94A5;&#x7684;&#x7C7B;&#x578B;&#x7531;&#x5B50;&#x7C7B;&#x786E;&#x5B9A;&#x3002;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x660E;&#x786E;&#x6807;&#x8BC6;[load]&#x65B9;&#x6CD5;&#x5C06;&#x83B7;&#x53D6;&#x7684;&#x56FE;&#x7247;&#xFF08;_&#x5305;&#x62EC;&#x5176;scale_&#xFF09;&#x7684;&#x503C;&#x3002;&#x7ED9;&#x4E0D;&#x540C;&#x7684;[PictureProvider]&#x8D4B;&#x4E88;&#x76F8;&#x540C;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x548C;[PictureConfiguration]&#x5BF9;&#x8C61;&#x5E94;&#x4E92;&#x76F8;&#x8FD4;&#x56DE;==&#x7684;&#x952E;&#xFF08;&#x53EF;&#x80FD;&#x662F;&#x901A;&#x8FC7;&#x5BF9;&#x672C;&#x8EAB;&#x5B9E;&#x73B0;[==]&#x7684;&#x952E;&#x4F7F;&#x7528;&#x7C7B;&#xFF09;&#x3002;
+  Future&lt;T&gt; obtainKey(PictureConfiguration picture);
+
+  /// &#x5C06;&#x5BC6;&#x94A5;&#x8F6C;&#x6362;&#x4E3A;[PictureStreamCompleter]&#xFF0C;&#x7136;&#x540E;&#x5F00;&#x59CB;&#x83B7;&#x53D6;&#x56FE;&#x7247;
+  @protected
+  PictureStreamCompleter load(T key, {PictureErrorListener? onError});
+}
+</code></pre><p>PictureProvider&#x6709;&#x4E09;&#x4E2A;&#x548C;ImageProvider&#x4E00;&#x6837;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x5B9E;&#x8D77;&#x5230;&#x7684;&#x4F5C;&#x7528;&#x4E5F;&#x4E00;&#x6837;&#xFF0C;&#x54B1;&#x4EEC;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x8BE6;&#x7EC6;&#x8BF4;&#x4E86;&#x3002;
+resole&#xFF1A;&#x662F;&#x516C;&#x5171;&#x5165;&#x53E3;&#xFF0C;&#x91CC;&#x9762;&#x8C03;&#x7528;&#x4E86;obtainKey&#x548C;load&#x65B9;&#x6CD5;&#xFF0C;&#x7136;&#x540E;&#x5B50;&#x7C7B;&#x8981;&#x5B9E;&#x73B0;obtainKey&#x548C;load&#x65B9;&#x6CD5;&#x3002;
+obtainKey&#xFF1A;&#x901A;&#x8FC7;PictureConfiguration&#x83B7;&#x53D6;&#x56FE;&#x7247;&#x7684;key&#x4F5C;&#x4E3A;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x3002;
+load&#xFF1A;&#x901A;&#x8FC7;key&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x8FD4;&#x56DE;PictureStreamCompleter&#xFF0C;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x7BA1;&#x7406;&#x56FE;&#x7247;&#x7684;&#x5BF9;&#x8C61;&#x3002;</p>
+<h4 id="&#x7F13;&#x5B58;"><a name="&#x7F13;&#x5B58;" class="anchor-navigation-ex-anchor" href="#&#x7F13;&#x5B58;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F13;&#x5B58;</h4>
+<pre><code> PictureStream resolve(PictureConfiguration picture,
+      {PictureErrorListener? onError}) {
+    final PictureStream stream = PictureStream();
+    T? obtainedKey;
+    obtainKey(picture).then&lt;void&gt;(
+      (T key) {
+        obtainedKey = key;
+        stream.setCompleter(
+          cache.putIfAbsent(
+            key!,
+            () =&gt; load(key, onError: onError),
+          ),
+        );
+      },
+    )
+</code></pre><p>&#x8FD9;&#x91CC;&#x540C;&#x6837;&#x662F;&#x6709;&#x7F13;&#x5B58;&#x5219;&#x76F4;&#x63A5;&#x7528;&#x7F13;&#x5B58;&#x6587;&#x4EF6;&#xFF0C;&#x6CA1;&#x6709;&#x5219;&#x8C03;&#x7528;load&#x65B9;&#x6CD5;&#x4ECE;&#x7F51;&#x7EDC;&#x4E0B;&#x8F7D;&#x3002;&#x548C;&#x539F;&#x751F;ImageProvider&#x4E0D;&#x540C;&#x7684;&#x662F;svg&#x7F13;&#x5B58;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x9650;&#x5236;&#x6700;&#x5927;1000&#x4E2A;svg&#x56FE;&#x7247;&#x3002;</p>
+<pre><code>const int _kDefaultSize = 1000;/// &#x7F13;&#x5B58;&#x6700;&#x5927;&#x4E2A;&#x6570;
+class PictureCache {
+  final Map&lt;Object, PictureStreamCompleter&gt; _cache =
+      &lt;Object, PictureStreamCompleter&gt;{};/// &#x7F13;&#x5B58;&#x961F;&#x5217;
+
+  int get maximumSize =&gt; _maximumSize;
+  int _maximumSize = _kDefaultSize;
+
+  /// &#x6E05;&#x7A7A;&#x7F13;&#x5B58;
+  void clear() {
+    _cache.clear();
+  }
+
+  /// &#x8FD4;&#x56DE;&#x7ED9;&#x5B9A;&#x5BC6;&#x94A5;&#x7684;&#x5148;&#x524D;&#x7F13;&#x5B58;&#x7684;PictureStream &#xFF08;&#x5982;&#x679C;&#x6709;&#xFF09;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;PictureStream &#x3002; &#x5982;&#x679C;&#x4E0D;&#x662F;&#xFF0C;&#x5219;&#x9996;&#x5148;&#x8C03;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x56DE;&#x8C03;&#x3002; &#x5728;&#x8FD9;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5BC6;&#x94A5;&#x90FD;&#x5C06;&#x79FB;&#x52A8;&#x5230;&#x201C;&#x6700;&#x8FD1;&#x4F7F;&#x7528;&#x201D;&#x7684;&#x4F4D;&#x7F6E;&#x3002;
+/// &#x53C2;&#x6570;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;&#x3002; loader&#x65E0;&#x6CD5;&#x8FD4;&#x56DE;null&#x3002;
+  PictureStreamCompleter putIfAbsent(
+      Object key, PictureStreamCompleter loader()) {
+     PictureStreamCompleter? result = _cache[key];
+    if (result != null) {
+      // &#x5148;&#x79FB;&#x9664;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x80FD;&#x653E;&#x5230;&#x6700;&#x8FD1;&#x8BBF;&#x95EE;&#x4F4D;&#x7F6E;
+      _cache.remove(key);
+    } else {
+      if (_cache.length == maximumSize &amp;&amp; maximumSize &gt; 0)
+        _cache.remove(_cache.keys.first);
+      result = loader();
+    }
+    if (maximumSize &gt; 0) {
+      assert(_cache.length &lt; maximumSize);
+      _cache[key] = result;
+    }
+    return result;
+  }
+
+  /// The number of entries in the cache.
+  int get count =&gt; _cache.length;
+}
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x7F13;&#x5B58;svg&#x56FE;&#x7247;&#xFF0C;&#x5148;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x7F13;&#x5B58;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x76F4;&#x63A5;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5224;&#x65AD;&#x662F;&#x5426;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x7F13;&#x5B58;&#x6570;&#x91CF;&#x9650;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x79FB;&#x9664;&#x7B2C;&#x4E00;&#x4E2A;&#x7136;&#x540E;&#xFF0C;&#x4ECE;&#x7F51;&#x7EDC;&#x52A0;&#x8F7D;&#xFF0C;&#x5148;&#x5B58;&#x5230;&#x7F13;&#x5B58;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x3002;</p>
+<h4 id="&#x67E5;&#x770B;load&#x5B9E;&#x73B0;&#x3002;"><a name="&#x67E5;&#x770B;load&#x5B9E;&#x73B0;&#x3002;" class="anchor-navigation-ex-anchor" href="#&#x67E5;&#x770B;load&#x5B9E;&#x73B0;&#x3002;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x67E5;&#x770B;load&#x5B9E;&#x73B0;&#x3002;</h4>
+<pre><code>@override
+  PictureStreamCompleter load(NetworkPicture key,
+      {PictureErrorListener? onError}) {
+    return OneFramePictureStreamCompleter(_loadAsync(key, onError: onError),/// &#x4E00;&#x5E27;&#x56FE;&#x7247;&#x7BA1;&#x7406;&#x5668;
+        informationCollector: () sync* {
+      yield DiagnosticsProperty&lt;PictureProvider&gt;(&apos;Picture provider&apos;, this);/// &#x56FE;&#x7247;&#x8BCA;&#x65AD;&#x5668;&#xFF0C;&#x68C0;&#x6D4B;&#x56FE;&#x7247;&#x5C5E;&#x6027;
+      yield DiagnosticsProperty&lt;NetworkPicture&gt;(&apos;Picture key&apos;, key);
+    });
+  }
+ /// &#x4E0B;&#x8F7D;&#x56FE;&#x7247;
+  Future&lt;PictureInfo&gt; _loadAsync(NetworkPicture key,
+      {PictureErrorListener? onError}) async {
+    assert(key == this);
+    final Uint8List bytes = await httpGet(url, headers: headers);
+    if (onError != null) {
+      return decoder(
+        bytes,
+        colorFilter,
+        key.toString(),
+      ).catchError((Object error, StackTrace stack) {
+        onError(error, stack);
+        return Future&lt;PictureInfo&gt;.error(error, stack);
+      });
+    }
+    return decoder(bytes, colorFilter, key.toString());
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    return other is NetworkPicture &amp;&amp;
+        url == other.url &amp;&amp;
+        colorFilter == other.colorFilter;
+  }
+</code></pre><p>&#x540C;&#x6837;&#x7684;NetworkPicture&#x4E2D;&#x6709;&#x901A;&#x8FC7;url&#x4E0B;&#x8F7D;&#x56FE;&#x7247;&#xFF0C;&#x6700;&#x540E;_loadAsync&#x8FD4;&#x56DE;PictureInfo&#xFF0C;&#x4EE5;&#x53CA;&#x56FE;&#x7247;&#x7684;key&#x662F;&#x7531;url+colorFilter&#x7EC4;&#x6210;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x3002;
+&#x90A3;&#x4E48;bytes&#x662F;&#x600E;&#x4E48;&#x89E3;&#x6790;&#x6210;PictureInfo&#x7684;&#x5462;&#xFF1F;</p>
+<pre><code> pictureProvider = NetworkPicture(
+          allowDrawingOutsideViewBox == true
+              ? svgByteDecoderOutsideViewBox
+              : svgByteDecoder,
+          url,
+</code></pre><p>&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x5C31;&#x5F88;&#x6E05;&#x695A;&#x4E86;</p>
+<pre><code> /// A [PictureInfoDecoder] for [Uint8List]s that will clip to the viewBox.
+  static final PictureInfoDecoder&lt;Uint8List&gt; svgByteDecoder =
+      (Uint8List bytes, ColorFilter? colorFilter, String key) =&gt;
+          svg.svgPictureDecoder(bytes, false, colorFilter, key);
+
+  /// A [PictureInfoDecoder] for strings that will clip to the viewBox.
+  static final PictureInfoDecoder&lt;String&gt; svgStringDecoder =
+      (String data, ColorFilter? colorFilter, String key) =&gt;
+          svg.svgPictureStringDecoder(data, false, colorFilter, key);
+</code></pre><pre><code> Future&lt;PictureInfo&gt; svgPictureDecoder(
+    Uint8List raw,
+    bool allowDrawingOutsideOfViewBox,
+    ColorFilter? colorFilter,
+    String key,
+  ) async {
+    final DrawableRoot svgRoot = await fromSvgBytes(raw, key);
+    final Picture pic = svgRoot.toPicture(
+      clipToViewBox: allowDrawingOutsideOfViewBox == true ? false : true,
+      colorFilter: colorFilter,
+    );
+    return PictureInfo(
+      picture: pic,
+      viewport: svgRoot.viewport.viewBoxRect,
+      size: svgRoot.viewport.size,
+    );
+  }
+</code></pre><pre><code> Future&lt;DrawableRoot&gt; fromSvgString(String rawSvg, String key) async {
+    final SvgParser parser = SvgParser();
+    return await parser.parse(rawSvg, key: key);
+  }
+</code></pre><p>&#x7136;&#x540E;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x662F;&#x901A;&#x8FC7;SvgParser&#x89E3;&#x6790;&#x5F97;&#x5230;&#x7684;&#x3002;&#x5230;&#x8FD9;&#x91CC;&#x6574;&#x4E2A;&#x7684;svg&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x5B9E;&#x9645;&#x5C31;&#x7406;&#x987A;&#x4E86;&#x3002;
+&#x95EE;&#x9898;&#x4E00;&#xFF1A;&#x7B2C;&#x4E00;&#x6B21;&#x52A0;&#x8F7D;&#x600E;&#x4E48;&#x7F13;&#x5B58;&#x5230;_cache&#x91CC;&#x7684;&#xFF1F;
+&#x7B2C;&#x4E00;&#x6B21;load&#x4EE5;&#x540E;listener&#x91CC;&#x6709;&#x4E2A;_touch&#x65B9;&#x6CD5;&#x505A;&#x4E86;&#x7F13;&#x5B58;&#x5230;_cache&#x91CC;&#x4E0A;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>void _touch(Object key, _CachedImage image, TimelineTask? timelineTask) {
+       if (image.sizeBytes != null &amp;&amp; image.sizeBytes! &lt;= maximumSizeBytes &amp;&amp; maximumSize &gt; 0) {
+      _currentSizeBytes += image.sizeBytes!;///&#x56FE;&#x7247;&#x5927;&#x5C0F;&#x52A0;&#x5230;&#x7F13;&#x5B58;&#x5927;&#x5C0F;&#x91CC;
+      _cache[key] = image;/// &#x56FE;&#x7247;&#x6DFB;&#x52A0;&#x5230;&#x7F13;&#x5B58;
+      _checkCacheSize(timelineTask); /// &#x68C0;&#x6D4B;&#x7F13;&#x5B58;&#x5927;&#x5C0F;
+    } else {
+      image.dispose();
+    }
+  }
+</code></pre><p>&#x5F15;&#x7528;&#x6D41;&#x7A0B;&#xFF1A;</p>
+<pre><code>    try {
+      result = loader();
+      _trackLiveImage(key, result, null);///&#x628A;&#x56FE;&#x653E;&#x5230;liveimages
+    } catch (error, stackTrace) {}
+    bool listenedOnce = false;/// &#x53EA;&#x76D1;&#x542C;&#x4E00;&#x6B21;&#x6807;&#x5FD7;
+    _PendingImage? untrackedPendingImage;
+    void listener(ImageInfo? info, bool syncCall) {
+    ...
+     /// &#x5982;&#x679C;&#x521D;&#x6B21;&#x8C03;&#x7528;resolve&#x4F1A;&#x89E6;&#x53D1;touch 
+      if (untrackedPendingImage == null) {
+        _touch(key, image, listenerTask);
+      } else {
+        image.dispose();
+      }
+      ...
+      listenedOnce = true;
+    }
+
+    final ImageStreamListener streamListener = ImageStreamListener(listener);
+</code></pre><p>&#x95EE;&#x9898;&#x4E8C;&#xFF1A;ExactAssetImage&#x548C;AssetImage&#x533A;&#x522B;&#xFF1F;
+&#x4ECE;&#x8868;&#x8FBE;&#x5F0F;&#x5C31;&#x80FD;&#x770B;&#x51FA;</p>
+<pre><code>scale != null
+? ExactAssetImage(name, bundle: bundle, scale: scale, package: package)
+         : AssetImage(name, bundle: bundle, package: package)
+</code></pre><p>&#x6709;scale&#x7528;ExactAssetImage&#xFF0C;&#x6CA1;&#x6709;&#x7528;AssetImage&#xFF0C;&#x5177;&#x4F53;&#x533A;&#x522B;&#x5176;&#x5B9E;&#x662F;&#xFF0C;AssetImage&#x4F1A;&#x81EA;&#x52A8;&#x6839;&#x636E;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x7684;&#x8BBE;&#x5907;&#x53C2;&#x6570;&#xFF0C;&#x5C4F;&#x5E55;&#x50CF;&#x7D20;&#x6BD4;&#x81EA;&#x52A8;&#x4F7F;&#x7528;&#x5BF9;&#x5E94;1x&#x8FD8;&#x662F;2x,3x&#x7684;&#x56FE;&#x7247;&#x3002;&#x800C;ExactAssetImage&#x5219;&#x5FFD;&#x7565;&#x8BBE;&#x5907;&#x50CF;&#x7D20;&#x6BD4;&#xFF0C;&#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;&#x786E;&#x5207;assetName&#x548C;scale&#x6765;&#x83B7;&#x53D6;&#x56FE;&#x7247;</p>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; moon 2019 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x672C;&#x4E66;&#x53D1;&#x5E03;&#x65F6;&#x95F4;&#xFF1A;
+2021-06-02 10:52:45
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Flutter源码">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="inheritedWidget/InheritedWidget.html" class="navigation navigation-next " aria-label="Next page: InheritedWidget">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Image源码分析","level":"1.3.1","depth":2,"next":{"title":"InheritedWidget","level":"1.3.2","depth":2,"path":"flutter/Flutter源码/inheritedWidget/InheritedWidget.md","ref":"flutter/Flutter源码/inheritedWidget/InheritedWidget.md","articles":[]},"previous":{"title":"Flutter源码","level":"1.3","depth":1,"path":"flutter/Flutter源码/README.md","ref":"flutter/Flutter源码/README.md","articles":[{"title":"Image源码分析","level":"1.3.1","depth":2,"path":"flutter/Flutter源码/image.md","ref":"flutter/Flutter源码/image.md","articles":[]},{"title":"InheritedWidget","level":"1.3.2","depth":2,"path":"flutter/Flutter源码/inheritedWidget/InheritedWidget.md","ref":"flutter/Flutter源码/inheritedWidget/InheritedWidget.md","articles":[]},{"title":"Flutter国际化","level":"1.3.3","depth":2,"path":"flutter/Flutter源码/intl/internationalization.md","ref":"flutter/Flutter源码/intl/internationalization.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github","code","-sharing","sharing-plus","-search","-lunr","search-pro","splitter","tags","tbfed-pagefooter","toggle-chapters","multipart","chapter-fold","lightbox","theme-comscore","theme-default","-ancre-navigation","anchor-navigation-ex","lightbox"],"root":".","styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © moon 2019","modify_label":"本书发布时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"github":{"url":"https://github.com/andyhome163"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"multipart":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"lightbox":{"jquery":true,"sameUuid":false},"theme-comscore":{},"tags":{"placement":"bottom"},"sharing":{"facebook":false,"twitter":false,"weibo":true,"qq":true},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"toggle-chapters":{}},"theme":"default","author":"ifmu","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"airbook","language":"zh-hans","output.name":"airbook","links":{"sidebar":{"首页":""}},"gitbook":"3.2.3","description":"技术点整理学习"},"file":{"path":"flutter/Flutter源码/image.md","mtime":"2021-06-02T02:52:45.910Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-02T03:15:19.190Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
