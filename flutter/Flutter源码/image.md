@@ -818,5 +818,7 @@ scale != null
 问题三 缓存中具体_pendingImages，_cache，_liveImages有什么区别？
 
 _pendingImages是图片正在缓冲时，当图片没有加载完成时，暂时存在这里，加载后通过监听器将图片放到_cache中。
+
 _liveImages是存储活动图片的，即被其他对象引用的图片。具体作用其实是活动的图片一个集合，无论是_pendingImages还是_cache的图片都可能存在，即使不允许缓存（缓存空间为0）也会加进来，用来追踪图片。
+
 当然从缓存获取图片是会依次遍历这三个集合，哪个有就返回，如果_liveImages有而_cache没有还会将图片加到_cache中。
