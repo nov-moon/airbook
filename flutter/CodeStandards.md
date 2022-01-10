@@ -6,11 +6,12 @@
 * 在controller的dispose中回收资源，如TextController回收、监听的取消等。
 * 刷新统一用update。
 * 布局时，使用Container，以Container的属性代替Align、Padding、ColoredBox、ClipPath等属性，减少Widget嵌套层级。
+* 定义Widget尽量提供const构造方法。
+* 使用Widget尽量使用const关键字。
 
 
 ## Model
-* 属性声明不使用'?'号，必须声明late。
-* FormJson给默认值：number => 0；string => ''。
+* 属性声明使用'?'号，尽量不声明late。
 * Model里面只写已用，不用的注释掉。
 
 ## 通用
